@@ -1,20 +1,23 @@
-//
-//  ViewController.swift
-//  JrAkademiGameProject
-//
-//  Created by ufuk donmez on 29.05.2023.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
+   
+    var gamesVc: GamesVc? = GamesVc()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-            //ufuk
+
+        if let gamesVc = gamesVc {
+            addChild(gamesVc)
+            gamesVc.view.frame = view.bounds  // Adjust the frame of the child view controller
+            view.addSubview(gamesVc.view)
+            gamesVc.didMove(toParent: self)
+        }
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
 
+        gamesVc?.view.center = view.center
+    }
 }
-
