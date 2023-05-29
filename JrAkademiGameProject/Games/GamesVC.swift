@@ -90,7 +90,8 @@ class GamesVc: UIViewController, UISearchBarDelegate {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         // Hücre kimliği için GameTableViewCell sınıfını kaydet
         tableView.register(GameTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        tableView.backgroundColor = UIColor.red
+        tableView.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
+
 
         gameViewController.view.addSubview(tableView)
         
