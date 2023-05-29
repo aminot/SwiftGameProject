@@ -4,15 +4,19 @@ class GameTableViewCell: UITableViewCell {
     // Özel hücre bileşenleri
     private let gameImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 104).isActive = true
         return imageView
     }()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20) // Kalın font, 27 px
+        label.font = UIFont.boldSystemFont(ofSize: 20) // Kalın font, 20 px
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 2 // İsim alt satıra geçebilir
         return label
     }()
     
@@ -55,6 +59,7 @@ class GameTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             gameImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             gameImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            gameImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             gameImageView.widthAnchor.constraint(equalToConstant: 120),
             gameImageView.heightAnchor.constraint(equalToConstant: 104),
             
@@ -63,22 +68,21 @@ class GameTableViewCell: UITableViewCell {
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
             ratingLabel.leadingAnchor.constraint(equalTo: gameImageView.trailingAnchor, constant: 16),
-            ratingLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 16),
+            ratingLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -36),
             
             categoriesLabel.leadingAnchor.constraint(equalTo: gameImageView.trailingAnchor, constant: 16),
-            categoriesLabel.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 16),
-            categoriesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            categoriesLabel.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 8),
+            categoriesLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -8)
         ])
+
     }
     
     // Hücre verilerini ayarlar
     func configure(with game: GameModel) {
-        if let imageURL = URL(string: game.image) {
-            if let imageData = try? Data(contentsOf: imageURL) {
-                if let image = UIImage(data: imageData) {
-                    gameImageView.image = image
-                }
-            }
+        if let imageURL = URL(string: game.image),
+           let imageData = try? Data(contentsOf: imageURL),
+           let image = UIImage(data: imageData) {
+            gameImageView.image = image
         }
         nameLabel.text = game.gameName
         ratingLabel.text = "Rating: \(game.metacritic)"

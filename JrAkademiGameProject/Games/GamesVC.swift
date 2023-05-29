@@ -28,8 +28,8 @@ class GamesVc: UIViewController, UISearchBarDelegate {
     }
     
     private func setupUI() {
-        view.backgroundColor = .white
-        
+     
+     
         // Bottom Tab Navigation
         let tabBarController = UITabBarController()
         
@@ -58,21 +58,27 @@ class GamesVc: UIViewController, UISearchBarDelegate {
         gamesLabel.translatesAutoresizingMaskIntoConstraints = false
         gameViewController.view.addSubview(gamesLabel)
         
+        let boldFontDescriptor = gamesLabel.font.fontDescriptor.withSymbolicTraits(.traitBold)
+        let boldFont = UIFont(descriptor: boldFontDescriptor!, size: gamesLabel.font.pointSize)
+        gamesLabel.font = boldFont
+
         NSLayoutConstraint.activate([
             gamesLabel.leadingAnchor.constraint(equalTo: gameViewController.view.leadingAnchor, constant: 16),
-            gamesLabel.bottomAnchor.constraint(equalTo: gameViewController.view.topAnchor, constant: 90),
+            gamesLabel.topAnchor.constraint(equalTo: gameViewController.view.topAnchor, constant: 90),
             gamesLabel.widthAnchor.constraint(equalToConstant: 109),
             gamesLabel.heightAnchor.constraint(equalToConstant: 41)
         ])
+
         
         // Search Bar
         let searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.placeholder = "Search for the games"
         gameViewController.view.addSubview(searchBar)
         
         NSLayoutConstraint.activate([
             searchBar.leadingAnchor.constraint(equalTo: gameViewController.view.leadingAnchor, constant: 16),
-            searchBar.topAnchor.constraint(equalTo: gamesLabel.bottomAnchor, constant: 25),
+            searchBar.topAnchor.constraint(equalTo: gamesLabel.bottomAnchor, constant: 9),
             searchBar.trailingAnchor.constraint(equalTo: gameViewController.view.trailingAnchor, constant: -16)
         ])
         
@@ -84,14 +90,16 @@ class GamesVc: UIViewController, UISearchBarDelegate {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         // Hücre kimliği için GameTableViewCell sınıfını kaydet
         tableView.register(GameTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.backgroundColor = UIColor.red
 
         gameViewController.view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 16),
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8),
             tableView.leadingAnchor.constraint(equalTo: gameViewController.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: gameViewController.view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: gameViewController.view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: tabBarController.tabBar.topAnchor)
+
         ])
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
@@ -124,6 +132,9 @@ extension GamesVc: UITableViewDelegate, UITableViewDataSource {
         // Yapılandırılmış hücreyi döndür
         return cell
     }
+    
+    
+
 
 
 }
