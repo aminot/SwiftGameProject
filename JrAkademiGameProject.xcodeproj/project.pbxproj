@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D3866CA94CA4FB52E12316F /* Pods_JrAkademiGameProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6D41B42F4019647A11F02B /* Pods_JrAkademiGameProject.framework */; };
 		C984209D2A24CAA300D8C324 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C984209C2A24CAA300D8C324 /* AppDelegate.swift */; };
 		C984209F2A24CAA300D8C324 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C984209E2A24CAA300D8C324 /* SceneDelegate.swift */; };
 		C98420A12A24CAA300D8C324 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98420A02A24CAA300D8C324 /* ViewController.swift */; };
@@ -17,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84A58B956DF3E751EA1C06C0 /* Pods-JrAkademiGameProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JrAkademiGameProject.release.xcconfig"; path = "Target Support Files/Pods-JrAkademiGameProject/Pods-JrAkademiGameProject.release.xcconfig"; sourceTree = "<group>"; };
+		8C6D41B42F4019647A11F02B /* Pods_JrAkademiGameProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JrAkademiGameProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B59F0DC3D13E3E7EEDD49FDD /* Pods-JrAkademiGameProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JrAkademiGameProject.debug.xcconfig"; path = "Target Support Files/Pods-JrAkademiGameProject/Pods-JrAkademiGameProject.debug.xcconfig"; sourceTree = "<group>"; };
 		C98420992A24CAA300D8C324 /* JrAkademiGameProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JrAkademiGameProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C984209C2A24CAA300D8C324 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C984209E2A24CAA300D8C324 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,17 +37,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D3866CA94CA4FB52E12316F /* Pods_JrAkademiGameProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D3246AC23C47F12EB2CE8EA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B59F0DC3D13E3E7EEDD49FDD /* Pods-JrAkademiGameProject.debug.xcconfig */,
+				84A58B956DF3E751EA1C06C0 /* Pods-JrAkademiGameProject.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		55751257477CB7D9922E9F57 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C6D41B42F4019647A11F02B /* Pods_JrAkademiGameProject.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C98420902A24CAA300D8C324 = {
 			isa = PBXGroup;
 			children = (
 				C984209B2A24CAA300D8C324 /* JrAkademiGameProject */,
 				C984209A2A24CAA300D8C324 /* Products */,
+				2D3246AC23C47F12EB2CE8EA /* Pods */,
+				55751257477CB7D9922E9F57 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,9 +102,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C98420B02A24CAA400D8C324 /* Build configuration list for PBXNativeTarget "JrAkademiGameProject" */;
 			buildPhases = (
+				A316D9E3823DCC653F4B19B7 /* [CP] Check Pods Manifest.lock */,
 				C98420952A24CAA300D8C324 /* Sources */,
 				C98420962A24CAA300D8C324 /* Frameworks */,
 				C98420972A24CAA300D8C324 /* Resources */,
+				149FFC38D549CAF176EBCDDD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -135,6 +162,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		149FFC38D549CAF176EBCDDD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JrAkademiGameProject/Pods-JrAkademiGameProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JrAkademiGameProject/Pods-JrAkademiGameProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JrAkademiGameProject/Pods-JrAkademiGameProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A316D9E3823DCC653F4B19B7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JrAkademiGameProject-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C98420952A24CAA300D8C324 /* Sources */ = {
@@ -286,6 +355,7 @@
 		};
 		C98420B12A24CAA400D8C324 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B59F0DC3D13E3E7EEDD49FDD /* Pods-JrAkademiGameProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -313,6 +383,7 @@
 		};
 		C98420B22A24CAA400D8C324 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84A58B956DF3E751EA1C06C0 /* Pods-JrAkademiGameProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
