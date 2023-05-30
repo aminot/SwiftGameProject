@@ -69,6 +69,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C922E19B2A263D5300650260 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				C92C81402A2539A60049C164 /* Cell */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		C922E19C2A263D5E00650260 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C939F92E2A24E19100B4ED2B /* Games */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		C92C81402A2539A60049C164 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,8 +124,8 @@
 		C984209B2A24CAA300D8C324 /* JrAkademiGameProject */ = {
 			isa = PBXGroup;
 			children = (
-				C92C81402A2539A60049C164 /* Cell */,
-				C939F92E2A24E19100B4ED2B /* Games */,
+				C922E19C2A263D5E00650260 /* Screens */,
+				C922E19B2A263D5300650260 /* UIComponents */,
 				C984209C2A24CAA300D8C324 /* AppDelegate.swift */,
 				C984209E2A24CAA300D8C324 /* SceneDelegate.swift */,
 				C98420A02A24CAA300D8C324 /* ViewController.swift */,
