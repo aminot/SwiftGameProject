@@ -6,6 +6,7 @@ target 'JrAkademiGameProject' do
   use_frameworks!
 pod 'Carbon'
 pod 'Alamofire'
+pod 'SnapKit', '~> 5.6.0'
   # Pods for JrAkademiGameProject
 
 end

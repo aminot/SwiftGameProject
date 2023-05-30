@@ -29,7 +29,7 @@ class GamesVc: UIViewController, UISearchBarDelegate {
     
     private func setupUI() {
      
-     
+        
         // Bottom Tab Navigation
         let tabBarController = UITabBarController()
         
