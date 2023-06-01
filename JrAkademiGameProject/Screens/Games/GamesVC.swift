@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import Carbon
 
 class GamesVC: UIViewController {
     var gamesViewModel: GamesViewModel? = GamesViewModel()
@@ -7,6 +8,15 @@ class GamesVC: UIViewController {
     private let cellIdentifier = "Cell"
     var games: [GameModel] = []
     
+    var isToggled = false {
+        didSet { render() }
+    }
+    
+    private let renderer = Renderer(
+        adapter: UITableViewAdapter(),
+        updater: UITableViewUpdater()
+    )
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -14,7 +24,7 @@ class GamesVC: UIViewController {
             // Veri çekme tamamlandığında closure içinde güncelleme yap
             if let gamesViewModel = self?.gamesViewModel {
                 self?.games = gamesViewModel.games
-
+                self?.render()
                 DispatchQueue.main.async {
                     // TableView'ı güncelle
                     self?.tableView.reloadData()
@@ -22,35 +32,48 @@ class GamesVC: UIViewController {
             }
         })
 
+        title = "Hello"
+        tableView.contentInset.top = 44
+        tableView.separatorStyle = .none
+        renderer.target = tableView
+
         setupUI()
+       
     }
     
-    private func setupUI() {
-        // Table View
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(GameTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        tableView.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
-        view.addSubview(tableView)
+    func render() {
+        var sections: [Section] = []
+        var gameCells: [CellNode] = []
         
-        tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        for game in games {
+            let categories = game.tags.joined(separator: ", ")
+            let gameCell = CellNode(id: game.gameName, GameTableViewCell(nameLabelText: game.gameName, ratingLabelText: game.metacritic, categoriesLabelText: categories, gameImageURL: game.image))
+            gameCells.append(gameCell)
         }
+        
+        let helloSection = Section(id: "hello", cells: gameCells)
+        sections.append(helloSection)
+        
+        renderer.render(sections)
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        isToggled.toggle()
+    }
+    
+    
+    private func setupUI() {
+        // TableView ve diğer arayüz bileşenlerini burada yapılandırabilirsiniz.
+        view.addSubview(tableView) // TableView'ı ekranın görünür kısmına ekleyin
+        tableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+                }
+        tableView.backgroundColor = UIColor.white
     }
 }
 
-extension GamesVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return games.count
-    }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? GameTableViewCell ?? GameTableViewCell(style: .default, reuseIdentifier: cellIdentifier)
-        
-        let game = games[indexPath.row]
-        cell.configure(with: game)
-        
-        return cell
-    }
-}
+
+ 
+

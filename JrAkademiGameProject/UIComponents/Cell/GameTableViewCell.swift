@@ -1,7 +1,23 @@
 import UIKit
+import Carbon
 import SnapKit
 
-class GameTableViewCell: UITableViewCell {
+class GameTableViewCell: UITableViewCell, Component {
+
+   func render(in content: GameTableViewCell) {
+       // Burada herhangi bir işlem yapmanıza gerek yok
+   }
+
+   func referenceSize(in bounds: CGRect) -> CGSize? {
+
+       return CGSize(width: bounds.width, height: 64) // Replace 64 with the desired height value
+
+   }
+
+   func renderContent() -> GameTableViewCell {
+       return self
+   }
+    
     // Özel hücre bileşenleri
     private let gameImageView: UIImageView = {
         let imageView = UIImageView()
@@ -32,13 +48,26 @@ class GameTableViewCell: UITableViewCell {
     private let separatorView = UIView()
     
     // Hücre oluşturulduğunda çağrılır
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    init(nameLabelText: String, ratingLabelText: Int, categoriesLabelText: String, gameImageURL: String) {
+        super.init(style: .default, reuseIdentifier: nil)
         separatorView.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         addSubview(separatorView)
         
+        nameLabel.text = nameLabelText
+        ratingLabel.text = String(ratingLabelText)
+        categoriesLabel.text = categoriesLabelText
+        
+        if let imageURL = URL(string: gameImageURL),
+           let imageData = try? Data(contentsOf: imageURL),
+           let image = UIImage(data: imageData) {
+            gameImageView.image = image
+        }
+            
         setupUI()
     }
+
+
+
     
     // Hücre yeniden kullanıldığında çağrılır
     override func prepareForReuse() {
@@ -59,7 +88,7 @@ class GameTableViewCell: UITableViewCell {
         
         gameImageView.snp.makeConstraints { make in
             make.leading.equalTo(contentView).offset(16)
-            make.top.equalTo(contentView).offset(16)
+
             make.bottom.equalTo(contentView).offset(-24)
             make.width.equalTo(120)
             make.height.equalTo(104)
@@ -67,9 +96,11 @@ class GameTableViewCell: UITableViewCell {
         
         nameLabel.snp.makeConstraints { make in
             make.leading.equalTo(gameImageView.snp.trailing).offset(16)
-            make.top.equalTo(contentView).offset(16)
-            make.trailing.equalTo(contentView).offset(-16)
+            make.centerY.equalTo(gameImageView.snp.top).offset(16)
+        
+            // Diğer constraint'leri buraya ekleyin
         }
+
         
         ratingLabel.snp.makeConstraints { make in
             make.leading.equalTo(gameImageView.snp.trailing).offset(16)
