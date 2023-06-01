@@ -19,6 +19,7 @@
 		C98420A72A24CAA300D8C324 /* JrAkademiGameProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C98420A52A24CAA300D8C324 /* JrAkademiGameProject.xcdatamodeld */; };
 		C98420A92A24CAA400D8C324 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C98420A82A24CAA400D8C324 /* Assets.xcassets */; };
 		C98420AC2A24CAA400D8C324 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C98420AA2A24CAA400D8C324 /* LaunchScreen.storyboard */; };
+		C99BF8292A28BEF200D061E4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99BF8282A28BEF200D061E4 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		C98420A82A24CAA400D8C324 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C98420AB2A24CAA400D8C324 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C98420AD2A24CAA400D8C324 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C99BF8282A28BEF200D061E4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 		C984209B2A24CAA300D8C324 /* JrAkademiGameProject */ = {
 			isa = PBXGroup;
 			children = (
+				C99BF8272A28BCFF00D061E4 /* Network */,
 				C922E19C2A263D5E00650260 /* Screens */,
 				C922E19B2A263D5300650260 /* UIComponents */,
 				C984209C2A24CAA300D8C324 /* AppDelegate.swift */,
@@ -136,6 +139,14 @@
 				C98420A52A24CAA300D8C324 /* JrAkademiGameProject.xcdatamodeld */,
 			);
 			path = JrAkademiGameProject;
+			sourceTree = "<group>";
+		};
+		C99BF8272A28BCFF00D061E4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C99BF8282A28BEF200D061E4 /* NetworkManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +269,7 @@
 				C939F9322A24E1C400B4ED2B /* GamesViewModel.swift in Sources */,
 				C984209D2A24CAA300D8C324 /* AppDelegate.swift in Sources */,
 				C98420A72A24CAA300D8C324 /* JrAkademiGameProject.xcdatamodeld in Sources */,
+				C99BF8292A28BEF200D061E4 /* NetworkManager.swift in Sources */,
 				C939F9302A24E1AF00B4ED2B /* GamesModel.swift in Sources */,
 				C984209F2A24CAA300D8C324 /* SceneDelegate.swift in Sources */,
 				C92C81422A2539B60049C164 /* GameTableViewCell.swift in Sources */,
