@@ -7,21 +7,20 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // TabBarController'ı oluştur
         customTabBarController = UITabBarController()
 
         // GamesViewController'ı oluştur
         let gamesViewController = GamesVC()
         gamesViewController.title = "Games"
-        gamesViewController.tabBarItem = UITabBarItem(title: "Games", image: UIImage(systemName: "gamecontroller"), tag: 0)
+        gamesViewController.tabBarItem = UITabBarItem(title: "Games", image: UIImage(named: "Vector"), tag: 0)
         let gamesNavigationController = UINavigationController(rootViewController: gamesViewController)
         gamesNavigationController.navigationBar.prefersLargeTitles = true
 
         // FavoritesViewController'ı oluştur
         let favoritesViewController = GamesVC()
         favoritesViewController.title = "Favorites"
-        favoritesViewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), tag: 1)
+        favoritesViewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "Icon"), tag: 1)
         let favoritesNavigationController = UINavigationController(rootViewController: favoritesViewController)
         favoritesNavigationController.navigationBar.prefersLargeTitles = true
 
@@ -30,7 +29,7 @@ class ViewController: UIViewController {
         searchController.searchBar.placeholder = "Search"
         gamesNavigationController.navigationItem.searchController = searchController
         gamesNavigationController.navigationItem.hidesSearchBarWhenScrolling = false
-
+    
         // TabBarController'a bölümleri ekle
         customTabBarController.viewControllers = [gamesNavigationController, favoritesNavigationController]
 
@@ -38,7 +37,6 @@ class ViewController: UIViewController {
         addChild(customTabBarController)
         view.addSubview(customTabBarController.view)
         customTabBarController.didMove(toParent: self)
-
         // Arama çubuğunu GamesViewController'ın NavigationBar'ına ekle
         gamesViewController.navigationItem.searchController = searchController
 

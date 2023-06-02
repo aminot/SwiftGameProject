@@ -10,7 +10,7 @@ class GameTableViewCell: UITableViewCell, Component {
 
    func referenceSize(in bounds: CGRect) -> CGSize? {
 
-       return CGSize(width: bounds.width, height: 64) // Replace 64 with the desired height value
+       return CGSize(width: bounds.width, height: 136) // Replace 64 with the desired height value
 
    }
 
@@ -29,7 +29,8 @@ class GameTableViewCell: UITableViewCell, Component {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20) // Kalın font, 20 px
-        label.numberOfLines = 2 // İsim alt satıra geçebilir
+        label.numberOfLines = 0 // İsim alt satıra geçebilir
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
@@ -51,11 +52,20 @@ class GameTableViewCell: UITableViewCell, Component {
     init(nameLabelText: String, ratingLabelText: Int, categoriesLabelText: String, gameImageURL: String) {
         super.init(style: .default, reuseIdentifier: nil)
         separatorView.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
-        addSubview(separatorView)
+     //   addSubview(separatorView)
         
         nameLabel.text = nameLabelText
-        ratingLabel.text = String(ratingLabelText)
         categoriesLabel.text = categoriesLabelText
+        let fullText = "metacritic: \(ratingLabelText)"
+        let attributedString = NSMutableAttributedString(string: fullText)
+
+        let range = (fullText as NSString).range(of: String(ratingLabelText))
+        attributedString.addAttribute(.foregroundColor, value: UIColor.red, range: range)
+
+        ratingLabel.attributedText = attributedString
+
+
+
         
         if let imageURL = URL(string: gameImageURL),
            let imageData = try? Data(contentsOf: imageURL),
@@ -80,45 +90,48 @@ class GameTableViewCell: UITableViewCell, Component {
     
     // Hücre arayüzünü yapılandırır
     private func setupUI() {
+        
         contentView.addSubview(gameImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(ratingLabel)
         contentView.addSubview(categoriesLabel)
-        contentView.addSubview(separatorView) // Ayırıcı görünümü en altta olacak şekilde ekle
+        contentView.addSubview(separatorView)
+        
+        contentView.backgroundColor = UIColor.white // Kırmızı renk
+    
+        
         
         gameImageView.snp.makeConstraints { make in
+            make.top.equalTo(contentView).offset(16)
             make.leading.equalTo(contentView).offset(16)
-
-            make.bottom.equalTo(contentView).offset(-24)
             make.width.equalTo(120)
             make.height.equalTo(104)
         }
         
         nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(gameImageView.snp.top)
             make.leading.equalTo(gameImageView.snp.trailing).offset(16)
-            make.centerY.equalTo(gameImageView.snp.top).offset(16)
-        
-            // Diğer constraint'leri buraya ekleyin
+            make.trailing.lessThanOrEqualToSuperview().inset(16)
+            make.bottom.lessThanOrEqualTo(gameImageView.snp.bottom)
         }
 
         
         ratingLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(gameImageView.snp.bottom).offset(-24)
             make.leading.equalTo(gameImageView.snp.trailing).offset(16)
-            make.bottom.equalTo(categoriesLabel.snp.top).offset(-8)
         }
         
         categoriesLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(gameImageView.snp.bottom).offset(0)
             make.leading.equalTo(gameImageView.snp.trailing).offset(16)
-            make.bottom.equalTo(separatorView.snp.top).offset(-16)
         }
         
         separatorView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView)
-            make.trailing.equalTo(contentView)
-            make.bottom.equalTo(contentView)
+            make.leading.trailing.bottom.equalTo(contentView)
             make.height.equalTo(8)
         }
     }
+
     
     // Hücre verilerini ayarlar
     func configure(with game: GameModel) {

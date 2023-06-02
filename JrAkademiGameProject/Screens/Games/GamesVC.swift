@@ -32,13 +32,13 @@ class GamesVC: UIViewController {
             }
         })
 
-        title = "Hello"
-        tableView.contentInset.top = 44
+        title = "Games"
+        tableView.contentInset.top = -25
         tableView.separatorStyle = .none
         renderer.target = tableView
 
         setupUI()
-       
+
     }
     
     func render() {
@@ -52,8 +52,9 @@ class GamesVC: UIViewController {
         }
         
         let helloSection = Section(id: "hello", cells: gameCells)
+
         sections.append(helloSection)
-        
+  
         renderer.render(sections)
     }
 
@@ -69,7 +70,14 @@ class GamesVC: UIViewController {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
                 }
-        tableView.backgroundColor = UIColor.white
+        tableView.backgroundColor = UIColor(red: 0xF8/255, green: 0xF8/255, blue: 0xF8/255, alpha: 1.0)
+
+
+
+
+
+      
+
     }
 }
 
