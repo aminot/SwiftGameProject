@@ -15,18 +15,19 @@ class GamesVC: UIViewController {
     private let renderer = Renderer(
         adapter: UITableViewAdapter(),
         updater: UITableViewUpdater()
+
     )
+
+       
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         gamesViewModel?.fetchGames(completion: { [weak self] in
-            // Veri çekme tamamlandığında closure içinde güncelleme yap
             if let gamesViewModel = self?.gamesViewModel {
                 self?.games = gamesViewModel.games
                 self?.render()
                 DispatchQueue.main.async {
-                    // TableView'ı güncelle
                     self?.tableView.reloadData()
                 }
             }
@@ -36,9 +37,8 @@ class GamesVC: UIViewController {
         tableView.contentInset.top = -25
         tableView.separatorStyle = .none
         renderer.target = tableView
-
+    
         setupUI()
-
     }
     
     func render() {
@@ -63,25 +63,13 @@ class GamesVC: UIViewController {
         isToggled.toggle()
     }
     
-    
     private func setupUI() {
-        // TableView ve diğer arayüz bileşenlerini burada yapılandırabilirsiniz.
-        view.addSubview(tableView) // TableView'ı ekranın görünür kısmına ekleyin
+        view.addSubview(tableView)
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-                }
+        }
         tableView.backgroundColor = UIColor(red: 0xF8/255, green: 0xF8/255, blue: 0xF8/255, alpha: 1.0)
-
-
-
-
-
-      
-
     }
+    
+
 }
-
-
-
- 
-
