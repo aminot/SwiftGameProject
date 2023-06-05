@@ -7,10 +7,10 @@ struct NetworkManager {
     private let apiKey = "3be8af6ebf124ffe81d90f514e59856c"
     private let baseUrl = "https://api.rawg.io/api/games"
     
-    func fetchGames(completion: @escaping (Result<[GameModel], Error>) -> Void) {
+    func fetchGames(pageSize: Int, completion: @escaping (Result<[GameModel], Error>) -> Void) {
         let parameters: [String: Any] = [
-            "page_size": 6,
-            "page": 1,
+            "page_size": 8,
+            "page": pageSize,
             "key": apiKey
         ]
         
@@ -32,7 +32,7 @@ struct NetworkManager {
                                     tags.append(genreName)
                                 }
                             }
-                            
+                       
                             let game = GameModel(gameName: name, metacritic: metacritic, image: backgroundImage, tags: tags)
                             
                             games.append(game)

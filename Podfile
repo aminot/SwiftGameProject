@@ -7,6 +7,7 @@ target 'JrAkademiGameProject' do
 pod 'Carbon'
 pod 'Alamofire'
 pod 'SnapKit', '~> 5.6.0'
+pod 'Kingfisher'
   # Pods for JrAkademiGameProject
 
 end
