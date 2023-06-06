@@ -142,22 +142,20 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
             
             
             for game in games {
-                let categories = game.tags.joined(separator: ", ")
-                
                 var  helloMesssage = HelloMessage(gameId: game.id, name: game.gameName,
                                  url: game.image,
                                  rating: game.metacritic,
-                                 categories: game.tags)
+                                                  categories: game.tags)
                 
                 helloMesssage.tapGestureHandler = { [weak self] gameID in
                             print(gameID,"ufuk")
                                 // click Handler
 
-                              //  let detailsViewController = DetailsViewController()
+                              let detailsViewController = DetailsViewController()
 
-                               // detailsViewController.gamesId = String(gameID)
+                    detailsViewController.gamesId = gameID
 
-                               // self?.navigationController?.pushViewController(detailsViewController, animated: true)
+                           self?.navigationController?.pushViewController(detailsViewController, animated: true)
 
                             }
                 
