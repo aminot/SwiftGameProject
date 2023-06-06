@@ -24,6 +24,7 @@ struct NetworkManager {
                         if let name = result["name"] as? String,
                            let metacritic = result["metacritic"] as? Int,
                            let backgroundImage = result["background_image"] as? String,
+                           let id = result["id"] as? Int,
                            let genres = result["genres"] as? [[String: Any]] {
                             
                             var tags = [String]()
@@ -33,7 +34,7 @@ struct NetworkManager {
                                 }
                             }
                        
-                            let game = GameModel(gameName: name, metacritic: metacritic, image: backgroundImage, tags: tags)
+                            let game = GameModel(gameName: name, metacritic: metacritic, image: backgroundImage, tags: tags,id: id)
                             
                             games.append(game)
                         }
@@ -66,6 +67,7 @@ struct NetworkManager {
                     for result in results {
                         if let name = result["name"] as? String,
                            let backgroundImage = result["background_image"] as? String,
+                           let id = result["id"] as? Int,
                            let genres = result["genres"] as? [[String: Any]]{
                             
                             var tags = [String]()
@@ -79,8 +81,7 @@ struct NetworkManager {
                                     
                             
                             
-                            let game = GameModel(gameName: name, metacritic: metacritic, image: backgroundImage, tags: tags)
-                            
+                            let game = GameModel(gameName: name, metacritic: metacritic, image: backgroundImage, tags: tags,id: id)
                             games.append(game)
                         }
                     }

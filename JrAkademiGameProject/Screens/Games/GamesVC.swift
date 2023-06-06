@@ -144,10 +144,24 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
             for game in games {
                 let categories = game.tags.joined(separator: ", ")
                 
-                let gameCell = CellNode(id: "", HelloMessage(name: game.gameName,
-                                                             url: game.image,
-                                                             rating: game.metacritic,
-                                                             categories: game.tags))
+                var  helloMesssage = HelloMessage(gameId: game.id, name: game.gameName,
+                                 url: game.image,
+                                 rating: game.metacritic,
+                                 categories: game.tags)
+                
+                helloMesssage.tapGestureHandler = { [weak self] gameID in
+                            print(gameID,"ufuk")
+                                // click Handler
+
+                              //  let detailsViewController = DetailsViewController()
+
+                               // detailsViewController.gamesId = String(gameID)
+
+                               // self?.navigationController?.pushViewController(detailsViewController, animated: true)
+
+                            }
+                
+                let gameCell = CellNode(id: "aaa" , helloMesssage)
                 gameCells.append(gameCell)
                 print("ufukkk", game.gameName)
             }

@@ -4,6 +4,8 @@ import SnapKit
 import Carbon
 
 class GameTableViewCell: UITableViewCell {
+    var tapGestureHandler: ((Int) -> Void)?
+    
     let gameImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -37,9 +39,14 @@ class GameTableViewCell: UITableViewCell {
         return view
     }()
     
+    var gameId2 : Int?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        contentView.addGestureRecognizer(tapRecognizer)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -84,13 +91,21 @@ class GameTableViewCell: UITableViewCell {
             make.height.equalTo(8)
         }
     }
+    
+    @objc private func handleTap() {
+
+        tapGestureHandler?(gameId2 ?? 11)
+        //print("Tablayıcıya tıklandı!", nameLabel.text , gameId2)
+    }
 }
 
 struct HelloMessage: IdentifiableComponent {
+    let gameId: Int
     let name: String
     let url: String
     let rating: Int
     let categories: [String]
+    var tapGestureHandler: ((Int) -> Void)?
     
     var id: String {
         name
@@ -105,6 +120,8 @@ struct HelloMessage: IdentifiableComponent {
     }
     
     func render(in content: GameTableViewCell) {
+        content.gameId2 = gameId
+        content.tapGestureHandler = tapGestureHandler
         content.nameLabel.text = name
         if let imageUrl = URL(string: url) {
             let processor = DownsamplingImageProcessor(size: CGSize(width: 120, height: 104))
