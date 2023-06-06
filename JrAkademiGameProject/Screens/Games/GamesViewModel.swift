@@ -18,4 +18,19 @@ class GamesViewModel {
 
 
 
+    func fetchSearchGames(pageSize: Int, searchQuery:String, completion: @escaping () -> Void) {
+        games  = []
+        NetworkManager.shared.fetchSearchGames(pageSize: pageSize, searchQuery: searchQuery) { [weak self] result in
+            switch result {
+            case .success(let games):
+                self?.games = games // Gelen oyunları mevcut games dizisine ekleyin
+       
+                completion()
+            case .failure(let error):
+                print("Hata: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    
 }

@@ -394,7 +394,7 @@
 		9A7B23A1BFB1D45E7AE24038EA4033F9 /* UICollectionViewAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICollectionViewAdapter.swift; path = Sources/Adapters/UICollectionViewAdapter.swift; sourceTree = "<group>"; };
 		9D0D8C8E3BFA8D7DD732BF76025BA760 /* CacheSerializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CacheSerializer.swift; path = Sources/Cache/CacheSerializer.swift; sourceTree = "<group>"; };
 		9D43BC8E143CB5BB5A2445251E367C32 /* AnimatedImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnimatedImageView.swift; path = Sources/Views/AnimatedImageView.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E99E930569632B7087F320EABCF7438 /* Combine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Combine.swift; path = Source/Combine.swift; sourceTree = "<group>"; };
 		9F1EFFE667F8B5A5C447C2C5EF615322 /* ImageProcessor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageProcessor.swift; path = Sources/Image/ImageProcessor.swift; sourceTree = "<group>"; };
 		9F8B2016ABA83835546F5A5485221EFB /* ImageView+Kingfisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ImageView+Kingfisher.swift"; path = "Sources/Extensions/ImageView+Kingfisher.swift"; sourceTree = "<group>"; };
@@ -418,7 +418,7 @@
 		B9EEFDF8F246778926F357B4B628F258 /* Kingfisher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Kingfisher.debug.xcconfig; sourceTree = "<group>"; };
 		BB2BD01ACD35E39A71275D0224E05C82 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupportDSL.swift; path = Sources/ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
 		BD60D6410CB49B41C62F27E42AF91173 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Sources/ConstraintView.swift; sourceTree = "<group>"; };
-		BD7C3FC00609ABD079D179F42DD9CF35 /* Pods-JrAkademiGameProject */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-JrAkademiGameProject"; path = Pods_JrAkademiGameProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD7C3FC00609ABD079D179F42DD9CF35 /* Pods_JrAkademiGameProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JrAkademiGameProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE96D0FEB5EAA84A18E30B1C8AA8956F /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMultiplierTarget.swift; path = Sources/ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
 		BEA72EB8A3E05979BAE93AACEF881C94 /* KFImageProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KFImageProtocol.swift; path = Sources/SwiftUI/KFImageProtocol.swift; sourceTree = "<group>"; };
 		BF142314532841B6127455A3E0546DD9 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
@@ -427,7 +427,7 @@
 		C2ADD12755100A2B62F4071A58B101A0 /* ConstraintMakerEditable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerEditable.swift; path = Sources/ConstraintMakerEditable.swift; sourceTree = "<group>"; };
 		C3777CA990385A3D2E6D659BE57F44FB /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
 		C3E4751276C8E9F2BBCB8169A7DAD805 /* ConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintItem.swift; path = Sources/ConstraintItem.swift; sourceTree = "<group>"; };
-		C3F44C782D64D7EB20B61CE3844EBFAD /* Kingfisher */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Kingfisher; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3F44C782D64D7EB20B61CE3844EBFAD /* Kingfisher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4A171398FA2959B6AA1EEDF4D8183C5 /* IdentifiableComponent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentifiableComponent.swift; path = Sources/IdentifiableComponent.swift; sourceTree = "<group>"; };
 		C52AC0D0F274851E8539477223DA13CA /* SnapKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.debug.xcconfig; sourceTree = "<group>"; };
 		C63970247FAA858A9C80C6E74A745CD7 /* ImageModifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageModifier.swift; path = Sources/Networking/ImageModifier.swift; sourceTree = "<group>"; };
@@ -578,7 +578,6 @@
 				160C57C56A55D3BB7DF8B4E7AE10CACF /* UILayoutSupport+Extensions.swift */,
 				C8116EF11687B2B3B8AD3A650688BBC5 /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -709,7 +708,6 @@
 				DEE3CC9879C801EA0F3C48FEB2A72333 /* WKInterfaceImage+Kingfisher.swift */,
 				F5E79B25AAE4A048C39CE5A689F0B6A5 /* Support Files */,
 			);
-			name = Kingfisher;
 			path = Kingfisher;
 			sourceTree = "<group>";
 		};
@@ -746,7 +744,6 @@
 				3150C4072CC5C0939611683FA33350E9 /* ViewNode.swift */,
 				29FD8616CE3D66E441A563F6C4A6A1E3 /* Support Files */,
 			);
-			name = Carbon;
 			path = Carbon;
 			sourceTree = "<group>";
 		};
@@ -792,7 +789,6 @@
 				630E349C7E4DDC042C867616BF993657 /* Validation.swift */,
 				F8304EB232BAA6524A868324765CD3FE /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -813,8 +809,8 @@
 				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */,
 				873033B0ECD4ED35C1265ABE29970757 /* Carbon */,
 				797B1BBC3E03CD39B8CB79D79BCFF843 /* DifferenceKit */,
-				C3F44C782D64D7EB20B61CE3844EBFAD /* Kingfisher */,
-				BD7C3FC00609ABD079D179F42DD9CF35 /* Pods-JrAkademiGameProject */,
+				C3F44C782D64D7EB20B61CE3844EBFAD /* Kingfisher.framework */,
+				BD7C3FC00609ABD079D179F42DD9CF35 /* Pods_JrAkademiGameProject.framework */,
 				979486118B3E90C08386079D57962701 /* SnapKit */,
 			);
 			name = Products;
@@ -834,7 +830,6 @@
 				187911C1C42C692C89A99F9840347D3B /* Core */,
 				F810F3401A8A560E650774A20DDE1276 /* Support Files */,
 			);
-			name = DifferenceKit;
 			path = DifferenceKit;
 			sourceTree = "<group>";
 		};
@@ -1028,7 +1023,7 @@
 			);
 			name = "Pods-JrAkademiGameProject";
 			productName = Pods_JrAkademiGameProject;
-			productReference = BD7C3FC00609ABD079D179F42DD9CF35 /* Pods-JrAkademiGameProject */;
+			productReference = BD7C3FC00609ABD079D179F42DD9CF35 /* Pods_JrAkademiGameProject.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		8FC6E51285E4FD828A61BEFD2100CD64 /* DifferenceKit */ = {
@@ -1064,7 +1059,7 @@
 			);
 			name = Kingfisher;
 			productName = Kingfisher;
-			productReference = C3F44C782D64D7EB20B61CE3844EBFAD /* Kingfisher */;
+			productReference = C3F44C782D64D7EB20B61CE3844EBFAD /* Kingfisher.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		EAAA1AD3A8A1B59AB91319EE40752C6D /* Alamofire */ = {
