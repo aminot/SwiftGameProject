@@ -432,9 +432,9 @@
 		9BD353E454000DB6A01F0946E40DFC0C /* Alamofire.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.debug.xcconfig; sourceTree = "<group>"; };
 		9CBB4893F3763045AE45779644C13E26 /* DiskStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DiskStorage.swift; path = Sources/Cache/DiskStorage.swift; sourceTree = "<group>"; };
 		9CFC636E6B2C46A254CBCF0F340E03E4 /* SnapKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.release.xcconfig; sourceTree = "<group>"; };
-		9D443E759FE97A6C0CA5A3B5E4142EBA /* SwipeCellKit */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwipeCellKit; path = SwipeCellKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D443E759FE97A6C0CA5A3B5E4142EBA /* SwipeCellKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwipeCellKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D56C5CAD36528325552209A4D433F9D /* SwipeAction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwipeAction.swift; path = Source/SwipeAction.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9FEE268B1D92898E48A1B0E8F8984892 /* ImageDownloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageDownloader.swift; path = Sources/Networking/ImageDownloader.swift; sourceTree = "<group>"; };
 		A082867B9447CA9A26635AB23B66164C /* URLRequest+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+Alamofire.swift"; path = "Source/URLRequest+Alamofire.swift"; sourceTree = "<group>"; };
 		A0FF2CB9FDF495AB101CDEE62E7A2776 /* SwipeCellKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwipeCellKit.debug.xcconfig; sourceTree = "<group>"; };
@@ -467,7 +467,7 @@
 		BBA075D971C0422DFE914B0E2FD0ECA5 /* ConstraintOffsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintOffsetTarget.swift; path = Sources/ConstraintOffsetTarget.swift; sourceTree = "<group>"; };
 		BC909B4656E53C29D1BCE1305FA50B20 /* KF.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KF.swift; path = Sources/General/KF.swift; sourceTree = "<group>"; };
 		BCA7A87475ABB7FE0B463F8BC3E42203 /* NSButton+Kingfisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSButton+Kingfisher.swift"; path = "Sources/Extensions/NSButton+Kingfisher.swift"; sourceTree = "<group>"; };
-		BD7C3FC00609ABD079D179F42DD9CF35 /* Pods-JrAkademiGameProject */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-JrAkademiGameProject"; path = Pods_JrAkademiGameProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD7C3FC00609ABD079D179F42DD9CF35 /* Pods_JrAkademiGameProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JrAkademiGameProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB07C783AAA9EB7E15356DCB6D48D68 /* Kingfisher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Kingfisher.debug.xcconfig; sourceTree = "<group>"; };
 		BEDD4DECE3E79F261E89F2D4AE41DB8D /* Box.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Box.swift; path = Sources/Utility/Box.swift; sourceTree = "<group>"; };
 		BF035C9C6B7473526F2B94C204C94A59 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
@@ -663,7 +663,6 @@
 				27FFB48D97E5B68B5304CBBD80666DFC /* SwipeTransitionLayout.swift */,
 				7F52EC2FCFCDCEEEB413DD2CB32DD553 /* Support Files */,
 			);
-			name = SwipeCellKit;
 			path = SwipeCellKit;
 			sourceTree = "<group>";
 		};
@@ -715,7 +714,6 @@
 				2C171E3F8A716ECF9A45EE2D5A3B7128 /* ViewNode.swift */,
 				89DCE2572BA6375BBB5F87F37416D73F /* Support Files */,
 			);
-			name = Carbon;
 			path = Carbon;
 			sourceTree = "<group>";
 		};
@@ -770,7 +768,6 @@
 				A1DB9BD75B0538ABE3366F0C4C732836 /* Core */,
 				E93FC170ABCE433DAFFA52FBC73DDE63 /* Support Files */,
 			);
-			name = DifferenceKit;
 			path = DifferenceKit;
 			sourceTree = "<group>";
 		};
@@ -844,7 +841,6 @@
 				BF035C9C6B7473526F2B94C204C94A59 /* Validation.swift */,
 				CDD6508D0254DBD8B1BDC78A806A08DF /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -855,9 +851,9 @@
 				873033B0ECD4ED35C1265ABE29970757 /* Carbon */,
 				797B1BBC3E03CD39B8CB79D79BCFF843 /* DifferenceKit */,
 				C3F44C782D64D7EB20B61CE3844EBFAD /* Kingfisher */,
-				BD7C3FC00609ABD079D179F42DD9CF35 /* Pods-JrAkademiGameProject */,
+				BD7C3FC00609ABD079D179F42DD9CF35 /* Pods_JrAkademiGameProject.framework */,
 				979486118B3E90C08386079D57962701 /* SnapKit */,
-				9D443E759FE97A6C0CA5A3B5E4142EBA /* SwipeCellKit */,
+				9D443E759FE97A6C0CA5A3B5E4142EBA /* SwipeCellKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -912,7 +908,6 @@
 				E0FAE73F33E7DDFE8F5C92DD143F7901 /* UILayoutSupport+Extensions.swift */,
 				83F5FA1D92999CBFE559F294C09FF73A /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -1016,7 +1011,6 @@
 				902451B2738D5DDC36B69289B3224189 /* WKInterfaceImage+Kingfisher.swift */,
 				58FE75DC73ADE4A99F8983097786C04D /* Support Files */,
 			);
-			name = Kingfisher;
 			path = Kingfisher;
 			sourceTree = "<group>";
 		};
@@ -1130,7 +1124,7 @@
 			);
 			name = SwipeCellKit;
 			productName = SwipeCellKit;
-			productReference = 9D443E759FE97A6C0CA5A3B5E4142EBA /* SwipeCellKit */;
+			productReference = 9D443E759FE97A6C0CA5A3B5E4142EBA /* SwipeCellKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		28DBFD7C4BA62D2E2BCB62172DE80B6B /* Carbon */ = {
@@ -1173,7 +1167,7 @@
 			);
 			name = "Pods-JrAkademiGameProject";
 			productName = Pods_JrAkademiGameProject;
-			productReference = BD7C3FC00609ABD079D179F42DD9CF35 /* Pods-JrAkademiGameProject */;
+			productReference = BD7C3FC00609ABD079D179F42DD9CF35 /* Pods_JrAkademiGameProject.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		8FC6E51285E4FD828A61BEFD2100CD64 /* DifferenceKit */ = {

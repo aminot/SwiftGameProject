@@ -23,7 +23,16 @@ class GameTableViewCell: UITableViewCell {
     
     let ratingLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.textColor = .red
+        return label
+    }()
+    
+    let metacriticLabel: UILabel = {
+        let label = UILabel()
+   
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
@@ -39,7 +48,7 @@ class GameTableViewCell: UITableViewCell {
         return view
     }()
     
-    var gameId2 : Int?
+    var gameId2: Int?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -57,6 +66,7 @@ class GameTableViewCell: UITableViewCell {
         addSubview(gameImageView)
         addSubview(nameLabel)
         addSubview(ratingLabel)
+        addSubview(metacriticLabel)
         addSubview(categoriesLabel)
         addSubview(separatorView)
         
@@ -78,7 +88,12 @@ class GameTableViewCell: UITableViewCell {
         
         ratingLabel.snp.makeConstraints { make in
             make.bottom.equalTo(gameImageView.snp.bottom).offset(-24)
-            make.leading.equalTo(gameImageView.snp.trailing).offset(16)
+            make.leading.equalTo(metacriticLabel.snp.trailing).offset(1)
+        }
+        
+        metacriticLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(ratingLabel.snp.bottom)
+            make.leading.equalTo(gameImageView.snp.trailing).offset( 16) // 16 birimlik boşluk eklendi
         }
         
         categoriesLabel.snp.makeConstraints { make in
@@ -93,7 +108,6 @@ class GameTableViewCell: UITableViewCell {
     }
     
     @objc private func handleTap() {
-
         tapGestureHandler?(gameId2 ?? 11)
         //print("Tablayıcıya tıklandı!", nameLabel.text , gameId2)
     }
@@ -130,7 +144,20 @@ struct HelloMessage: IdentifiableComponent {
                 options: [.processor(processor)]
             )
         }
-        content.ratingLabel.text = String(rating)
+        
+        let ratingText = "\(rating)"
+        let attributedString = NSMutableAttributedString(string: ratingText)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: 0, length: ratingText.count))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 18), range: NSRange(location: 0, length: ratingText.count))
+        content.ratingLabel.attributedText = attributedString
+        
+        let metacriticText = "Metacritic: "
+        let metacriticAttributedString = NSMutableAttributedString(string: metacriticText)
+        metacriticAttributedString.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 0, length: 11))
+        metacriticAttributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 14), range: NSRange(location: 0, length: 11))
+
+        content.metacriticLabel.attributedText = metacriticAttributedString
+        
         content.categoriesLabel.text = genreToString(array: categories)
     }
     

@@ -30,9 +30,10 @@ class CustomFavoritesAdapter: UITableViewAdapter{
             let managedObjectContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorities")
-            fetchRequest.predicate = NSPredicate(format: "name == %@", favoritiesVC?.nameArray[indexPath.row] ?? "")
+            fetchRequest.predicate = NSPredicate(format: "id == %d", favoritiesVC?.gameArray[indexPath.row].id ?? "")
             
             do {
+         
                 let results = try managedObjectContext.fetch(fetchRequest) as! [NSManagedObject]
                 if let object = results.first {
                     managedObjectContext.delete(object)
@@ -42,9 +43,6 @@ class CustomFavoritesAdapter: UITableViewAdapter{
                 print("Could not delete data: \(error), \(error.userInfo)")
             }
             
-     
-            // Delete the row from the table view
-      
             favoritiesVC?.getData()
            
            // tableView.reloadData() // Update the table view after deletion

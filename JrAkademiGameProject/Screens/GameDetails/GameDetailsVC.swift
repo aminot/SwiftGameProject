@@ -134,7 +134,7 @@ class DetailsViewController: UIViewController {
         favorite.setValue(gameDetails?.backgroundImageAdditional, forKey: "image")
         favorite.setValue(gameDetails?.metacritic, forKey: "metacritic")
         favorite.setValue(combinedGenres, forKey: "genres")
-
+        favorite.setValue(gamesId, forKey: "id")
         do {
             try managedContext.save()
             showAlert(message: "Favori kaydedildi.")

@@ -4,188 +4,112 @@ import SnapKit
 import Carbon
 
 class FavoritiesVC: UIViewController, UINavigationControllerDelegate {
-  
-    
     var fromSearch = false
     var gamesViewModel: FavoritiesViewModel? = FavoritiesViewModel()
     private let tableView = UITableView()
     private let cellIdentifier = "Cell"
-    var games: [GameModel] = []
-    var metacriticArray: [Int] = []
-    var nameArray: [String] = []
-    var imageArray: [String] = []
-    var genresArray: [String] = []
+    var gameArray: [GameData] = []
   
-
- 
-
-
-    
     private let renderer = Renderer(
-   
         adapter: CustomFavoritesAdapter(),
         updater: UITableViewUpdater()
     )
     
-
-    
-    func getData() -> Bool {
+    func getData() {
+        gameArray.removeAll()
         
-        metacriticArray.removeAll()
-         nameArray.removeAll()
-         imageArray.removeAll()
-         genresArray.removeAll()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return false
+            return
         }
         let managedObjectContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
 
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorities")
         fetchRequest.resultType = .dictionaryResultType
-        fetchRequest.propertiesToFetch = ["metacritic", "name", "image", "genres"]
+        fetchRequest.propertiesToFetch = ["metacritic", "name", "image", "genres","id"]
         fetchRequest.returnsDistinctResults = true
         
         do {
             let results = try managedObjectContext.fetch(fetchRequest) as! [NSDictionary]
-             
+            
             for result in results {
-                if let metacritic = result["metacritic"] as? Int {
-                    metacriticArray.append(metacritic)
+                if let metacritic = result["metacritic"] as? Int,
+                   let id = result["id"] as? Int,
+                   let name = result["name"] as? String,
+                   let image = result["image"] as? String,
+                   let genres = result["genres"] as? String {
+                    let gameData = GameData(metacritic: metacritic, id: id, name: name, image: image, genres: genres)
+                    gameArray.append(gameData)
                     print("metacritic:", metacritic)
-                } else {
-                    print("Hata: metacritic değeri bulunamadı veya türü uyumsuz.")
-                }
-
-                if let name = result["name"] as? String {
-                    nameArray.append(name)
+                    print("id:", id)
                     print("name:", name)
-                } else {
-                    print("Hata: name değeri bulunamadı veya türü uyumsuz.")
-                }
-
-                if let image = result["image"] as? String {
-                    imageArray.append(image)
                     print("image:", image)
-                } else {
-                    print("Hata: image değeri bulunamadı veya türü uyumsuz.")
-                }
-
-                if let genres = result["genres"] as? String {
-                    genresArray.append(genres)
                     print("genres:", genres)
                 } else {
-                    print("Hata: genres değeri bulunamadı veya türü uyumsuz.")
+                    print("Hata: Veri uyumsuz veya eksik.")
                 }
-
             }
             
-            // Metacritic, name, image ve genres değerlerini içeren dizileri kullanabilirsiniz.
-            print(metacriticArray)
-            print(nameArray)
-            print(imageArray)
-            print(genresArray)
             render()
             
         } catch let error as NSError {
             print("Could not fetch data: \(error), \(error.userInfo)")
         }
-        return false
     }
-
-
-
-  
-
     
- 
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        var isFirstAppearance = true
-            
-        if isFirstAppearance && viewController is FavoritiesVC {
-                   isFirstAppearance = false
-                   metacriticArray.removeAll()
-                   nameArray.removeAll()
-                   imageArray.removeAll()
-                   genresArray.removeAll()
-                   getData()
-               }
+        if viewController is FavoritiesVC {
+            getData()
+        }
     }
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.delegate = self
-      //  getData()
-       // print("ufuk",renderer.adapter.aa)
       
-        title = "Favorites "
+        title = "Favorites"
         tableView.contentInset.top = 0
         tableView.separatorStyle = .none
         renderer.target = tableView
- 
         renderer.adapter.favoritiesVC = self
-
         setupUI()
-
     }
-    
     
     func render() {
         var sections: [Section] = []
         var gameCells: [CellNode] = []
         
-        if(nameArray.isEmpty){
-     
-            
-         
+        if gameArray.isEmpty {
             let updateCell = CellNode(id: "aa", emptyComponent(name: "No game has been searched."))
-                gameCells.append(updateCell)
-       
-            
+            gameCells.append(updateCell)
             let helloSection = Section(id: "hello", cells: gameCells)
             sections.append(helloSection)
-            
-            renderer.render(sections)
-            
-        }
-        
-        else
-        {
-   
-            
-            
-       
-            
-            
-            for index in 0..<nameArray.count {
-                let name = nameArray[index]
-                let url = imageArray[index]
-                let rating = metacriticArray[index]
-                let categories = [genresArray[index]]
+        } else {
+            for gameData in gameArray {
+                var helloMessage = HelloMessage(gameId: gameData.id,
+                                                name: gameData.name,
+                                                url: gameData.image,
+                                                rating: gameData.metacritic,
+                                                categories: [gameData.genres])
                 
-                var helloMessage = HelloMessage(gameId: 1, name: name,
-                                                url: url,
-                                                rating: rating,
-                                                categories: categories)
+                helloMessage.tapGestureHandler = { [weak self] gameId in
+                    print(gameId, "ufuk")
+                    // click Handler
+                    let detailsViewController = DetailsViewController()
+                    detailsViewController.gamesId = gameId
+                    self?.navigationController?.pushViewController(detailsViewController, animated: true)
+                }
                 
                 let gameCell = CellNode(id: "aaa", helloMessage)
                 gameCells.append(gameCell)
-              
             }
-
-            
-        
             
             let helloSection = Section(id: "hello", cells: gameCells)
             sections.append(helloSection)
-            
-            renderer.render(sections)
-            
         }
+        
+        
+        renderer.render(sections)
     }
-
-
     
     private func setupUI() {
         view.addSubview(tableView)
@@ -196,6 +120,10 @@ class FavoritiesVC: UIViewController, UINavigationControllerDelegate {
     }
 }
 
-
-
-
+struct GameData {
+    var metacritic: Int
+    var id: Int
+    var name: String
+    var image: String
+    var genres: String
+}

@@ -115,7 +115,7 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
     
     
     override func viewDidLoad() {
-   //deleteAllData()
+ //  deleteAllData()
      
         super.viewDidLoad()
         getData()
