@@ -3,7 +3,7 @@ import CoreData
 import SnapKit
 import Carbon
 
-class FavoritiesVC: UIViewController, UISearchControllerDelegate {
+class FavoritiesVC: UIViewController, UINavigationControllerDelegate {
   
     
     var fromSearch = false
@@ -22,13 +22,19 @@ class FavoritiesVC: UIViewController, UISearchControllerDelegate {
 
     
     private let renderer = Renderer(
-        adapter: CustomTableViewAdapter(),
+   
+        adapter: CustomFavoritesAdapter(),
         updater: UITableViewUpdater()
     )
     
 
     
     func getData() -> Bool {
+        
+        metacriticArray.removeAll()
+         nameArray.removeAll()
+         imageArray.removeAll()
+         genresArray.removeAll()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return false
         }
@@ -92,19 +98,36 @@ class FavoritiesVC: UIViewController, UISearchControllerDelegate {
 
     
  
-    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        var isFirstAppearance = true
+            
+        if isFirstAppearance && viewController is FavoritiesVC {
+                   isFirstAppearance = false
+                   metacriticArray.removeAll()
+                   nameArray.removeAll()
+                   imageArray.removeAll()
+                   genresArray.removeAll()
+                   getData()
+               }
+    }
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getData()
+        navigationController?.delegate = self
+      //  getData()
        // print("ufuk",renderer.adapter.aa)
-       
-        title = "Favorites " + String(nameArray.count)
+      
+        title = "Favorites "
         tableView.contentInset.top = 0
         tableView.separatorStyle = .none
         renderer.target = tableView
-    
+ 
+        renderer.adapter.favoritiesVC = self
+
         setupUI()
+
     }
     
     

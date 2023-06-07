@@ -12,6 +12,7 @@
 		C939F9302A24E1AF00B4ED2B /* GamesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C939F92F2A24E1AF00B4ED2B /* GamesModel.swift */; };
 		C939F9322A24E1C400B4ED2B /* GamesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C939F9312A24E1C400B4ED2B /* GamesViewModel.swift */; };
 		C939F9342A24E1ED00B4ED2B /* GamesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C939F9332A24E1ED00B4ED2B /* GamesVC.swift */; };
+		C93D469C2A3101C30042E581 /* CustomFavoritesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93D469B2A3101C30042E581 /* CustomFavoritesAdapter.swift */; };
 		C95742762A2E24FE002119A2 /* CustomAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95742752A2E24FE002119A2 /* CustomAdapter.swift */; };
 		C95742782A2F5F92002119A2 /* NoGameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95742772A2F5F92002119A2 /* NoGameCell.swift */; };
 		C984209D2A24CAA300D8C324 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C984209C2A24CAA300D8C324 /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 		C939F92F2A24E1AF00B4ED2B /* GamesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModel.swift; sourceTree = "<group>"; };
 		C939F9312A24E1C400B4ED2B /* GamesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewModel.swift; sourceTree = "<group>"; };
 		C939F9332A24E1ED00B4ED2B /* GamesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesVC.swift; sourceTree = "<group>"; };
+		C93D469B2A3101C30042E581 /* CustomFavoritesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFavoritesAdapter.swift; sourceTree = "<group>"; };
 		C95742752A2E24FE002119A2 /* CustomAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAdapter.swift; sourceTree = "<group>"; };
 		C95742772A2F5F92002119A2 /* NoGameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoGameCell.swift; sourceTree = "<group>"; };
 		C98420992A24CAA300D8C324 /* JrAkademiGameProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JrAkademiGameProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +104,8 @@
 			children = (
 				C9FA531E2A2FDCC30026374A /* DetailsView */,
 				C92C81402A2539A60049C164 /* Cell */,
+				C93D469B2A3101C30042E581 /* CustomFavoritesAdapter.swift */,
+				C95742752A2E24FE002119A2 /* CustomAdapter.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -168,7 +172,6 @@
 				C98420AA2A24CAA400D8C324 /* LaunchScreen.storyboard */,
 				C98420AD2A24CAA400D8C324 /* Info.plist */,
 				C98420A52A24CAA300D8C324 /* JrAkademiGameProject.xcdatamodeld */,
-				C95742752A2E24FE002119A2 /* CustomAdapter.swift */,
 			);
 			path = JrAkademiGameProject;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C93D469C2A3101C30042E581 /* CustomFavoritesAdapter.swift in Sources */,
 				C95742762A2E24FE002119A2 /* CustomAdapter.swift in Sources */,
 				C98420A12A24CAA300D8C324 /* ViewController.swift in Sources */,
 				C939F9342A24E1ED00B4ED2B /* GamesVC.swift in Sources */,
