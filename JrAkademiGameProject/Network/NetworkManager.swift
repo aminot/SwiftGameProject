@@ -50,7 +50,7 @@ struct NetworkManager {
     
     func fetchGameDetails(id: Int, completion: @escaping (Result<GameDetailsModal, Error>) -> Void) {
         let  url = "https://api.rawg.io/api/games/\(id)?key=3be8af6ebf124ffe81d90f514e59856c"
-        
+     
         AF.request(url).responseDecodable(of: GameDetailsModal.self) { response in
             switch response.result {
             case .success(let gameDetails):

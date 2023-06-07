@@ -23,7 +23,7 @@ class GameDetailsViewModal {
                 // İstek başarılıysa gameDetails kullanılabilir
                 completion(gameDetails) // gameDetails'i completion bloğuyla ViewController'a iletiyoruz
                 
-                print(gameDetails.name , "ufukkkk")
+                print(gameDetails.metacritic , gameDetails.genres ,"ufukkkk")
                 print(gameDetails.descriptionRaw)
                 // Diğer özellikler için de gameDetails üzerinden erişim sağlanabilir
                 

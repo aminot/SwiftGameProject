@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 import SnapKit
 import Carbon
 
@@ -84,10 +85,38 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
         
     }
     
- 
+    func deleteAllData() {
+        
+        lazy var persistentContainer: NSPersistentContainer = {
+            let container = NSPersistentContainer(name: "JrAkademiGameProject")
+            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error as NSError? {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            })
+            return container
+        }()
+        
+        
+        let context = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorities")
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            for object in results {
+                guard let objectData = object as? NSManagedObject else { continue }
+                context.delete(objectData)
+            }
+            try context.save()
+        } catch let error {
+            print("Error deleting data: \(error)")
+        }
+    }
     
     
     override func viewDidLoad() {
+   //deleteAllData()
+     
         super.viewDidLoad()
         getData()
        // print("ufuk",renderer.adapter.aa)

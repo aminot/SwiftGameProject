@@ -30,6 +30,8 @@
 		C9FA53222A2FDD300026374A /* DescriptionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FA53212A2FDD300026374A /* DescriptionComponent.swift */; };
 		C9FA53242A2FDD3D0026374A /* OpenUrlComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FA53232A2FDD3D0026374A /* OpenUrlComponent.swift */; };
 		C9FA53262A2FE2910026374A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FA53252A2FE2910026374A /* CoreData.framework */; };
+		C9FA53292A2FEC370026374A /* FavoritiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FA53282A2FEC370026374A /* FavoritiesVC.swift */; };
+		C9FA532B2A2FEC680026374A /* FavoritiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FA532A2A2FEC680026374A /* FavoritiesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,8 @@
 		C9FA53212A2FDD300026374A /* DescriptionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionComponent.swift; sourceTree = "<group>"; };
 		C9FA53232A2FDD3D0026374A /* OpenUrlComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenUrlComponent.swift; sourceTree = "<group>"; };
 		C9FA53252A2FE2910026374A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C9FA53282A2FEC370026374A /* FavoritiesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritiesVC.swift; sourceTree = "<group>"; };
+		C9FA532A2A2FEC680026374A /* FavoritiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritiesViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 		C922E19C2A263D5E00650260 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C9FA53272A2FEC080026374A /* Favorities */,
 				C9FA53172A2FC8CF0026374A /* GameDetails */,
 				C939F92E2A24E19100B4ED2B /* Games */,
 			);
@@ -194,6 +199,15 @@
 				C9FA53232A2FDD3D0026374A /* OpenUrlComponent.swift */,
 			);
 			path = DetailsView;
+			sourceTree = "<group>";
+		};
+		C9FA53272A2FEC080026374A /* Favorities */ = {
+			isa = PBXGroup;
+			children = (
+				C9FA53282A2FEC370026374A /* FavoritiesVC.swift */,
+				C9FA532A2A2FEC680026374A /* FavoritiesViewModel.swift */,
+			);
+			path = Favorities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +333,7 @@
 				C984209D2A24CAA300D8C324 /* AppDelegate.swift in Sources */,
 				C9FA531B2A2FCC9F0026374A /* GameDetailsViewModel.swift in Sources */,
 				C9B8A3A52A2A6D4300C89F79 /* LoadingCell.swift in Sources */,
+				C9FA532B2A2FEC680026374A /* FavoritiesViewModel.swift in Sources */,
 				C98420A72A24CAA300D8C324 /* JrAkademiGameProject.xcdatamodeld in Sources */,
 				C99BF8292A28BEF200D061E4 /* NetworkManager.swift in Sources */,
 				C939F9302A24E1AF00B4ED2B /* GamesModel.swift in Sources */,
@@ -329,6 +344,7 @@
 				C9FA53222A2FDD300026374A /* DescriptionComponent.swift in Sources */,
 				C92C81422A2539B60049C164 /* GameTableViewCell.swift in Sources */,
 				C9FA53192A2FCC1B0026374A /* GameDetailsVC.swift in Sources */,
+				C9FA53292A2FEC370026374A /* FavoritiesVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
