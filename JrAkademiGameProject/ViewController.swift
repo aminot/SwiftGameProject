@@ -1,20 +1,48 @@
-//
-//  ViewController.swift
-//  JrAkademiGameProject
-//
-//  Created by ufuk donmez on 29.05.2023.
-//
-
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
 
+    var customTabBarController: UITabBarController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-            //ufuk
+        // TabBarController'ı oluştur
+        customTabBarController = UITabBarController()
+
+        // GamesViewController'ı oluştur
+        let gamesViewController = GamesVC()
+        gamesViewController.title = "Games"
+        gamesViewController.tabBarItem = UITabBarItem(title: "Games", image: UIImage(named: "Vector"), tag: 0)
+        let gamesNavigationController = UINavigationController(rootViewController: gamesViewController)
+        gamesNavigationController.navigationBar.prefersLargeTitles = true
+
+        // FavoritesViewController'ı oluştur
+        let favoritesViewController = FavoritiesVC()
+        favoritesViewController.title = "Favorites"
+        favoritesViewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "Icon"), tag: 1)
+        let favoritesNavigationController = UINavigationController(rootViewController: favoritesViewController)
+        favoritesNavigationController.navigationBar.prefersLargeTitles = true
+
+        // Arama çubuğunu oluştur
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "Search"
+        gamesNavigationController.navigationItem.searchController = searchController
+        gamesNavigationController.navigationItem.hidesSearchBarWhenScrolling = false
+    
+        // TabBarController'a bölümleri ekle
+        customTabBarController.viewControllers = [gamesNavigationController, favoritesNavigationController]
+
+        // TabBarController'ı görüntüle
+        addChild(customTabBarController)
+        view.addSubview(customTabBarController.view)
+        customTabBarController.didMove(toParent: self)
+        // Arama çubuğunu GamesViewController'ın NavigationBar'ına ekle
+        gamesViewController.navigationItem.searchController = searchController
+
+        // TabBarController'ın constraints'lerini ayarla
+        customTabBarController.view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
-
-
 }
-
