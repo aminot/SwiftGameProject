@@ -9,9 +9,6 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
     var gamesViewModel: GamesViewModel? = GamesViewModel()
     private let tableView = UITableView()
     private let cellIdentifier = "Cell"
-    var games: [GameModel] = []
-    var page = 1
-    var pageSearch = 1
 
     private let renderer = Renderer(
         adapter: CustomTableViewAdapter(),
@@ -19,13 +16,8 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
     )
 
     func getData() {
-        gamesViewModel?.fetchGames(pageSize: page, completion: { [weak self] in
-            if let fetchedGames = self?.gamesViewModel?.games {
-                for game in fetchedGames {
-                    print(game.gameName, "eeee", fetchedGames.count)
-                }
-
-                self?.games.append(contentsOf: fetchedGames)
+        gamesViewModel?.fetchGames(completion: { [weak self] in
+            if let fetchedGames = self?.gamesViewModel?.getGames() {
                 self?.render()
             }
         })
@@ -33,13 +25,8 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
 
     func searchData(key: String) {
         fromSearch = true
-        gamesViewModel?.fetchSearchGames(pageSize: pageSearch, searchQuery: key, completion: { [weak self] in
-            if let fetchedGames = self?.gamesViewModel?.games {
-                for game in fetchedGames {
-                    print(game.gameName, "eeee", fetchedGames.count)
-                }
-                self?.games.removeAll() // games listesini temizle
-                self?.games.append(contentsOf: fetchedGames)
+        gamesViewModel?.fetchSearchGames(searchQuery: key, completion: { [weak self] in
+            if let fetchedGames = self?.gamesViewModel?.getGames() {
                 self?.render()
             }
         })
@@ -48,35 +35,14 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
     @objc func veriAlindi(notification: Notification) {
         if let veri = notification.userInfo?["veri"] as? Bool {
             if !fromSearch {
-                page += 1
-                getData()
+                gamesViewModel?.loadMoreGames(completion: { [weak self] in
+                    self?.render()
+                })
             }
-            print("tttt", veri)
-        }
-    }
-
-    func deleteAllData() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
-
-        do {
-            let results = try managedContext.fetch(fetchRequest)
-            for object in results {
-                guard let objectData = object as? NSManagedObject else { continue }
-                managedContext.delete(objectData)
-            }
-            try managedContext.save()
-        } catch let error {
-            print("Error deleting data: \(error)")
         }
     }
 
     override func viewDidLoad() {
-       // deleteAllData()
         super.viewDidLoad()
         getData()
 
@@ -98,8 +64,10 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
         var sections: [Section] = []
         var gameCells: [CellNode] = []
 
-        if games.isEmpty {
-            print("gameboş")
+        let fetchedGames = gamesViewModel?.getGames() ?? []
+
+        if fetchedGames.isEmpty {
+
 
             let updateCell = CellNode(id: "aa", EmptyComponent(name: "No game has been searched."))
             gameCells.append(updateCell)
@@ -118,11 +86,10 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
                 renderer.render(sections)
             }
 
-            for game in games {
+            for game in fetchedGames {
                 var helloMesssage = HelloMessage(gameId: game.id, name: game.gameName, url: game.image, rating: game.metacritic, categories: game.tags)
 
                 helloMesssage.tapGestureHandler = { [weak self] gameID in
-                    print(gameID, "ufuk")
                     let detailsViewController = DetailsViewController()
                     detailsViewController.gameId = gameID
                     self?.navigationController?.pushViewController(detailsViewController, animated: true)
@@ -130,7 +97,6 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
 
                 let gameCell = CellNode(id: "aaa", helloMesssage)
                 gameCells.append(gameCell)
-                print("ufukkk", game.gameName)
             }
 
             if !fromSearch {
@@ -157,17 +123,20 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
 extension GamesVC: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         fromSearch = false
-        games.removeAll()
-        page = 1
-        getData()
+        gamesViewModel?.deleteGames()
+        gamesViewModel?.fetchGames(completion: { [weak self] in
+            self?.render()
+        })
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         fromSearch = true
-
+   
         if searchText.count < 4 {
-            games.removeAll()
-            render()
+            gamesViewModel?.deleteGames()
+       
+            self.render()
+       
         } else if searchText.count >= 4 {
             searchData(key: searchText)
         }
