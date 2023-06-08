@@ -7,7 +7,7 @@
 
 import Foundation
 // MARK: - Welcome
-struct GameDetailsModal: Decodable {
+struct GameDetailsModel: Decodable {
     let name: String?
     let descriptionRaw: String?
     let backgroundImageAdditional: String?

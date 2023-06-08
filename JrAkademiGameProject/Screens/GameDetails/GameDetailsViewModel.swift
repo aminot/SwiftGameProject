@@ -7,8 +7,8 @@
 
 import Foundation
 import Alamofire
-class GameDetailsViewModal {
-    var gameDetails: GameDetailsModal?
+class GameDetailsViewModel {
+    var gameDetails: GameDetailsModel?
     private var url: String?
     private let networkManager = NetworkManager()
     
@@ -16,7 +16,7 @@ class GameDetailsViewModal {
     
     
     
-    func fetchGames(gameId: Int, completion: @escaping (GameDetailsModal?) -> Void) {
+    func fetchGames(gameId: Int, completion: @escaping (GameDetailsModel?) -> Void) {
         NetworkManager.shared.fetchGameDetails(id: gameId) { result in
             switch result {
             case .success(let gameDetails):

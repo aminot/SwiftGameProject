@@ -62,7 +62,6 @@ class LoadingCell: UITableViewCell, Component {
             nameLabel.text = nil
             activityIndicatorView.stopAnimating()
         }
-   
     }
     
     func startLoading() {

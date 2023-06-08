@@ -4,8 +4,7 @@ import SnapKit
 import Carbon
 
 class GamesVC: UIViewController, UISearchControllerDelegate {
-  
-    
+
     var fromSearch = false
     var gamesViewModel: GamesViewModel? = GamesViewModel()
     private let tableView = UITableView()
@@ -13,201 +12,139 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
     var games: [GameModel] = []
     var page = 1
     var pageSearch = 1
-    
-  
 
- 
-
-
-    
     private let renderer = Renderer(
         adapter: CustomTableViewAdapter(),
         updater: UITableViewUpdater()
     )
-    
 
-    
     func getData() {
         gamesViewModel?.fetchGames(pageSize: page, completion: { [weak self] in
             if let fetchedGames = self?.gamesViewModel?.games {
-                for gamee in fetchedGames {
-                    print(gamee.gameName,"eeee",fetchedGames.count)
+                for game in fetchedGames {
+                    print(game.gameName, "eeee", fetchedGames.count)
                 }
-                
+
                 self?.games.append(contentsOf: fetchedGames)
-                
-         
-                    self?.render()
-                
+                self?.render()
             }
         })
     }
 
     func searchData(key: String) {
-         fromSearch = true
+        fromSearch = true
         gamesViewModel?.fetchSearchGames(pageSize: pageSearch, searchQuery: key, completion: { [weak self] in
             if let fetchedGames = self?.gamesViewModel?.games {
-                for gamee in fetchedGames {
-                    print(gamee.gameName,"eeee",fetchedGames.count)
+                for game in fetchedGames {
+                    print(game.gameName, "eeee", fetchedGames.count)
                 }
                 self?.games.removeAll() // games listesini temizle
-          
                 self?.games.append(contentsOf: fetchedGames)
-                
-            
                 self?.render()
-            
-             
-                
             }
         })
     }
 
-    
-
-
-  
-    // Veriyi alma fonksiyonu
     @objc func veriAlindi(notification: Notification) {
         if let veri = notification.userInfo?["veri"] as? Bool {
-            // Veriyi kullan
-            // Örneğin, başka bir view controller'ı açmak ve veriyi göndermek:
-            if(!fromSearch)
-            {
+            if !fromSearch {
                 page += 1
                 getData()
             }
-         
-
-            
             print("tttt", veri)
         }
-        
     }
-    
+
     func deleteAllData() {
-        
-        lazy var persistentContainer: NSPersistentContainer = {
-            let container = NSPersistentContainer(name: "JrAkademiGameProject")
-            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-                if let error = error as NSError? {
-                    fatalError("Unresolved error \(error), \(error.userInfo)")
-                }
-            })
-            return container
-        }()
-        
-        
-        let context = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorities")
-        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
+
         do {
-            let results = try context.fetch(fetchRequest)
+            let results = try managedContext.fetch(fetchRequest)
             for object in results {
                 guard let objectData = object as? NSManagedObject else { continue }
-                context.delete(objectData)
+                managedContext.delete(objectData)
             }
-            try context.save()
+            try managedContext.save()
         } catch let error {
             print("Error deleting data: \(error)")
         }
     }
-    
-    
+
     override func viewDidLoad() {
- //  deleteAllData()
-     
+       // deleteAllData()
         super.viewDidLoad()
         getData()
-       // print("ufuk",renderer.adapter.aa)
+
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
-              navigationItem.searchController = searchController
-        
+        navigationItem.searchController = searchController
+
         NotificationCenter.default.addObserver(self, selector: #selector(veriAlindi(notification:)), name: NSNotification.Name("İslemTamamlandi"), object: nil)
 
         title = "Games"
         tableView.contentInset.top = -25
         tableView.separatorStyle = .none
         renderer.target = tableView
-    
+
         setupUI()
     }
-    
-    
+
     func render() {
         var sections: [Section] = []
         var gameCells: [CellNode] = []
-        
-        if(games.isEmpty){
+
+        if games.isEmpty {
             print("gameboş")
-            
-         
-            let updateCell = CellNode(id: "aa", emptyComponent(name: "No game has been searched."))
-                gameCells.append(updateCell)
-       
-            
+
+            let updateCell = CellNode(id: "aa", EmptyComponent(name: "No game has been searched."))
+            gameCells.append(updateCell)
+
             let helloSection = Section(id: "hello", cells: gameCells)
             sections.append(helloSection)
-            
+
             renderer.render(sections)
-            
-        }
-        
-        else
-        {
-   
-            
-            
-            if(fromSearch){
-                gameCells.removeAll() // Tüm hücreleri silmek için
-                
+        } else {
+            if fromSearch {
+                gameCells.removeAll()
+
                 let helloSection = Section(id: "hello", cells: gameCells)
                 sections.append(helloSection)
-                
+
                 renderer.render(sections)
-                
             }
-            
-            
+
             for game in games {
-                var  helloMesssage = HelloMessage(gameId: game.id, name: game.gameName,
-                                 url: game.image,
-                                 rating: game.metacritic,
-                                                  categories: game.tags)
-                
+                var helloMesssage = HelloMessage(gameId: game.id, name: game.gameName, url: game.image, rating: game.metacritic, categories: game.tags)
+
                 helloMesssage.tapGestureHandler = { [weak self] gameID in
-                            print(gameID,"ufuk")
-                                // click Handler
+                    print(gameID, "ufuk")
+                    let detailsViewController = DetailsViewController()
+                    detailsViewController.gameId = gameID
+                    self?.navigationController?.pushViewController(detailsViewController, animated: true)
+                }
 
-                              let detailsViewController = DetailsViewController()
-
-                    detailsViewController.gamesId = gameID
-
-                           self?.navigationController?.pushViewController(detailsViewController, animated: true)
-
-                            }
-                
-                let gameCell = CellNode(id: "aaa" , helloMesssage)
+                let gameCell = CellNode(id: "aaa", helloMesssage)
                 gameCells.append(gameCell)
                 print("ufukkk", game.gameName)
             }
-            
-            if(!fromSearch){
+
+            if !fromSearch {
                 let updateCell = CellNode(id: "aa", LoadingCell())
                 gameCells.append(updateCell)
             }
-            
+
             let helloSection = Section(id: "hello", cells: gameCells)
             sections.append(helloSection)
-            
+
             renderer.render(sections)
-            
         }
     }
 
-
-    
     private func setupUI() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
@@ -217,28 +154,22 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
     }
 }
 
-
-extension GamesVC:  UISearchBarDelegate {
-    
-    // Diğer kodlar ve işlevler
-    
+extension GamesVC: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         fromSearch = false
-        self.games.removeAll()
+        games.removeAll()
         page = 1
         getData()
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
         fromSearch = true
-       
+
         if searchText.count < 4 {
-            self.games.removeAll()
+            games.removeAll()
             render()
         } else if searchText.count >= 4 {
             searchData(key: searchText)
         }
     }
 }
-

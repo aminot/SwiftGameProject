@@ -1,17 +1,16 @@
-//
-//  ImageWithTitleComponent.swift
-//  JrAkademiGameProject
-//
-//  Created by ufuk donmez on 7.06.2023.
-//
-
-
 import UIKit
 import SnapKit
 import Kingfisher
 import Carbon
 
 class ImageWithTitleComponent: UIView, Component {
+    func render(in content: ImageWithTitleComponent) {
+         // Burada herhangi bir işlem yapmanıza gerek yok
+     }
+
+     func referenceSize(in bounds: CGRect) -> CGSize? {
+         return CGSize(width: bounds.width, height: 251) // Replace 64 with the desired height value
+     }
 
     let gameImageView: UIImageView = {
         let imageView = UIImageView()
@@ -44,11 +43,9 @@ class ImageWithTitleComponent: UIView, Component {
         addSubview(titleLabel)
     }
 
-    // MARK: - SetUp Constraints
     private func setupConstraints() {
         gameImageView.snp.makeConstraints {
-            $0.top.left.bottom.equalToSuperview()
-            $0.width.equalToSuperview()
+            $0.top.left.bottom.right.equalToSuperview()
             $0.height.equalTo(235)
         }
 
@@ -60,7 +57,6 @@ class ImageWithTitleComponent: UIView, Component {
     }
 
     func configure(imageUrl: String, name: String) {
-
         titleLabel.text = name
         if let url = URL(string: imageUrl) {
             gameImageView.kf.setImage(with: url)
@@ -68,16 +64,8 @@ class ImageWithTitleComponent: UIView, Component {
     }
 
     // MARK: - Component
-    func render(in content: ImageWithTitleComponent) {
-        // Burada herhangi bir işlem yapmanıza gerek yok
-    }
-
-    func referenceSize(in bounds: CGRect) -> CGSize? {
-        return CGSize(width: bounds.width, height: 251) // Replace 64 with the desired height value
-    }
 
     func renderContent() -> ImageWithTitleComponent {
         return self
     }
-
 }

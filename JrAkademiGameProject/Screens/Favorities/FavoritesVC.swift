@@ -3,9 +3,9 @@ import CoreData
 import SnapKit
 import Carbon
 
-class FavoritiesVC: UIViewController, UINavigationControllerDelegate {
+class FavoritesVC: UIViewController, UINavigationControllerDelegate {
     var fromSearch = false
-    var gamesViewModel: FavoritiesViewModel? = FavoritiesViewModel()
+    var gamesViewModel: FavoritesViewModel? = FavoritesViewModel()
     private let tableView = UITableView()
     private let cellIdentifier = "Cell"
     var gameArray: [GameData] = []
@@ -23,7 +23,7 @@ class FavoritiesVC: UIViewController, UINavigationControllerDelegate {
         }
         let managedObjectContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
 
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorities")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
         fetchRequest.resultType = .dictionaryResultType
         fetchRequest.propertiesToFetch = ["metacritic", "name", "image", "genres","id"]
         fetchRequest.returnsDistinctResults = true
@@ -57,7 +57,7 @@ class FavoritiesVC: UIViewController, UINavigationControllerDelegate {
     }
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        if viewController is FavoritiesVC {
+        if viewController is FavoritesVC {
             getData()
         }
     }
@@ -70,7 +70,7 @@ class FavoritiesVC: UIViewController, UINavigationControllerDelegate {
         tableView.contentInset.top = 0
         tableView.separatorStyle = .none
         renderer.target = tableView
-        renderer.adapter.favoritiesVC = self
+        renderer.adapter.favoritesVC = self
         setupUI()
     }
     
@@ -79,7 +79,7 @@ class FavoritiesVC: UIViewController, UINavigationControllerDelegate {
         var gameCells: [CellNode] = []
         
         if gameArray.isEmpty {
-            let updateCell = CellNode(id: "aa", emptyComponent(name: "No game has been searched."))
+            let updateCell = CellNode(id: "aa", EmptyComponent(name: "No game has been searched."))
             gameCells.append(updateCell)
             let helloSection = Section(id: "hello", cells: gameCells)
             sections.append(helloSection)
@@ -95,7 +95,7 @@ class FavoritiesVC: UIViewController, UINavigationControllerDelegate {
                     print(gameId, "ufuk")
                     // click Handler
                     let detailsViewController = DetailsViewController()
-                    detailsViewController.gamesId = gameId
+                    detailsViewController.gameId = gameId
                     self?.navigationController?.pushViewController(detailsViewController, animated: true)
                 }
                 

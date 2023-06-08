@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         gamesNavigationController.navigationBar.prefersLargeTitles = true
 
         // FavoritesViewController'ı oluştur
-        let favoritesViewController = FavoritiesVC()
+        let favoritesViewController = FavoritesVC()
         favoritesViewController.title = "Favorites"
         favoritesViewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "Icon"), tag: 1)
         let favoritesNavigationController = UINavigationController(rootViewController: favoritesViewController)

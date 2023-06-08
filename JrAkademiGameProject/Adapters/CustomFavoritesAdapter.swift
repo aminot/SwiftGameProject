@@ -11,7 +11,7 @@ import Carbon
 import CoreData
 
 class CustomFavoritesAdapter: UITableViewAdapter{
-    weak var favoritiesVC: FavoritiesVC?
+    weak var favoritesVC: FavoritesVC?
     // ... Your other code ...
     
     func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
@@ -21,19 +21,16 @@ class CustomFavoritesAdapter: UITableViewAdapter{
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-      
-            //tableView.deleteRows(at: [indexPath], with: .fade)
-            // Delete the corresponding data from Core Data
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
                 return
             }
+            
             let managedObjectContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
             
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorities")
-            fetchRequest.predicate = NSPredicate(format: "id == %d", favoritiesVC?.gameArray[indexPath.row].id ?? "")
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
+            fetchRequest.predicate = NSPredicate(format: "id == %d", favoritesVC?.gameArray[indexPath.row].id ?? "")
             
             do {
-         
                 let results = try managedObjectContext.fetch(fetchRequest) as! [NSManagedObject]
                 if let object = results.first {
                     managedObjectContext.delete(object)
@@ -43,14 +40,15 @@ class CustomFavoritesAdapter: UITableViewAdapter{
                 print("Could not delete data: \(error), \(error.userInfo)")
             }
             
-            favoritiesVC?.getData()
-           
-           // tableView.reloadData() // Update the table view after deletion
+            favoritesVC?.getData()
+            tableView.reloadData() // Update the table view after deletion
         }
     }
 
 
-    
+
+    /* Sola Kaydırma zımbırtısı */
+    /*
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Sil") { [weak self] (action, view, completion) in
             // Perform your delete action here
@@ -63,7 +61,7 @@ class CustomFavoritesAdapter: UITableViewAdapter{
         configuration.performsFirstActionWithFullSwipe = true
         return configuration
     }
-
+*/
 
 
 }

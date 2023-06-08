@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FavoritiesViewModel {
+class FavoritesViewModel {
     var games: [GameModel] = []
     
   

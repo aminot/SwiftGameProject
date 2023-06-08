@@ -4,7 +4,7 @@ import Alamofire
 struct NetworkManager {
     static let shared = NetworkManager()
     
-    private let apiKey = "3be8af6ebf124ffe81d90f514e59856c"
+    private let apiKey = "c58b253dd0d3487d93ee203a751e1ee0"
     private let baseUrl = "https://api.rawg.io/api/games"
     
     func fetchGames(pageSize: Int, completion: @escaping (Result<[GameModel], Error>) -> Void) {
@@ -34,7 +34,7 @@ struct NetworkManager {
                                 }
                             }
                        
-                            let game = GameModel(gameName: name, metacritic: metacritic, image: backgroundImage, tags: tags,id: id)
+                            let game = GameModel(gameName: name, metacritic: metacritic, image: backgroundImage, tags: tags, id: id)
                             
                             games.append(game)
                         }
@@ -48,10 +48,10 @@ struct NetworkManager {
         }
     }
     
-    func fetchGameDetails(id: Int, completion: @escaping (Result<GameDetailsModal, Error>) -> Void) {
-        let  url = "https://api.rawg.io/api/games/\(id)?key=3be8af6ebf124ffe81d90f514e59856c"
+    func fetchGameDetails(id: Int, completion: @escaping (Result<GameDetailsModel, Error>) -> Void) {
+        let url = "https://api.rawg.io/api/games/\(id)?key=c58b253dd0d3487d93ee203a751e1ee0"
      
-        AF.request(url).responseDecodable(of: GameDetailsModal.self) { response in
+        AF.request(url).responseDecodable(of: GameDetailsModel.self) { response in
             switch response.result {
             case .success(let gameDetails):
                 completion(.success(gameDetails))
@@ -61,10 +61,9 @@ struct NetworkManager {
         }
     }
     
-    
     func fetchSearchGames(pageSize: Int, searchQuery: String, completion: @escaping (Result<[GameModel], Error>) -> Void) {
         let baseUrl = "https://api.rawg.io/api/games"
-        let apiKey = "3be8af6ebf124ffe81d90f514e59856c"
+        let apiKey = "c58b253dd0d3487d93ee203a751e1ee0"
         
         let parameters: [String: Any] = [
             "page_size": 8,
@@ -83,7 +82,7 @@ struct NetworkManager {
                         if let name = result["name"] as? String,
                            let backgroundImage = result["background_image"] as? String,
                            let id = result["id"] as? Int,
-                           let genres = result["genres"] as? [[String: Any]]{
+                           let genres = result["genres"] as? [[String: Any]] {
                             
                             var tags = [String]()
                             for genre in genres {
@@ -93,14 +92,11 @@ struct NetworkManager {
                             }
                             
                             let metacritic = result["metacritic"] as? Int ?? 0
-                                    
                             
-                            
-                            let game = GameModel(gameName: name, metacritic: metacritic, image: backgroundImage, tags: tags,id: id)
+                            let game = GameModel(gameName: name, metacritic: metacritic, image: backgroundImage, tags: tags, id: id)
                             games.append(game)
                         }
                     }
-
                     
                     completion(.success(games))
                 }
@@ -109,6 +105,4 @@ struct NetworkManager {
             }
         }
     }
-    
-    
 }

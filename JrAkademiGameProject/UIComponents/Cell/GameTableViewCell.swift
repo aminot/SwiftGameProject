@@ -30,7 +30,6 @@ class GameTableViewCell: UITableViewCell {
     
     let metacriticLabel: UILabel = {
         let label = UILabel()
-   
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
@@ -93,7 +92,7 @@ class GameTableViewCell: UITableViewCell {
         
         metacriticLabel.snp.makeConstraints { make in
             make.bottom.equalTo(ratingLabel.snp.bottom)
-            make.leading.equalTo(gameImageView.snp.trailing).offset( 16) // 16 birimlik boşluk eklendi
+            make.leading.equalTo(gameImageView.snp.trailing).offset(16)
         }
         
         categoriesLabel.snp.makeConstraints { make in
@@ -155,7 +154,6 @@ struct HelloMessage: IdentifiableComponent {
         let metacriticAttributedString = NSMutableAttributedString(string: metacriticText)
         metacriticAttributedString.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 0, length: 11))
         metacriticAttributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 14), range: NSRange(location: 0, length: 11))
-
         content.metacriticLabel.attributedText = metacriticAttributedString
         
         content.categoriesLabel.text = genreToString(array: categories)

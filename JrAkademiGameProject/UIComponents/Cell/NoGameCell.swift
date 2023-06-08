@@ -35,14 +35,12 @@ class NoGameCell: UITableViewCell {
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(36) // nameLabel'i yatayda ortala
             make.centerX.equalToSuperview()
-              }
-
-       
+        }
     }
 }
 
 
-struct emptyComponent: IdentifiableComponent {
+struct EmptyComponent: IdentifiableComponent {
     let name: String
 
     
@@ -60,14 +58,13 @@ struct emptyComponent: IdentifiableComponent {
     
     func render(in content: NoGameCell) {
         content.nameLabel.text = name
-       
     }
     
     func referenceSize(in bounds: CGRect) -> CGSize? {
         return CGSize(width: bounds.width, height: bounds.height)
     }
     
-    func shouldContentUpdate(with next: emptyComponent) -> Bool {
+    func shouldContentUpdate(with next: EmptyComponent) -> Bool {
         return false
     }
 }
