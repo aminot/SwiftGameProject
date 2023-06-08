@@ -6,6 +6,8 @@ import Carbon
 class GamesVC: UIViewController, UISearchControllerDelegate {
 
     var fromSearch = false
+    var tempKey : String = ""
+   var searchBarLoadingPage = 1
     var gamesViewModel: GamesViewModel? = GamesViewModel()
     private let tableView = UITableView()
     private let cellIdentifier = "Cell"
@@ -31,6 +33,15 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
             }
         })
     }
+    func searchData2(key: String) {
+        fromSearch = true
+        gamesViewModel?.fetchSearchGames2(pageSearch: searchBarLoadingPage, searchQuery: key, completion: { [weak self] in
+            if let fetchedGames = self?.gamesViewModel?.getGames() {
+                self?.render()
+            }
+        })
+    }
+    
 
     @objc func veriAlindi(notification: Notification) {
         if let veri = notification.userInfo?["veri"] as? Bool {
@@ -38,6 +49,13 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
                 gamesViewModel?.loadMoreGames(completion: { [weak self] in
                     self?.render()
                 })
+            }
+            else
+            {
+                if  (gamesViewModel?.games.count)! > 6 {
+                    searchBarLoadingPage += 1
+                    searchData2(key:tempKey)
+                }
             }
         }
     }
@@ -77,14 +95,7 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
 
             renderer.render(sections)
         } else {
-            if fromSearch {
-                gameCells.removeAll()
-
-                let helloSection = Section(id: "hello", cells: gameCells)
-                sections.append(helloSection)
-
-                renderer.render(sections)
-            }
+        
 
             for game in fetchedGames {
                 var helloMesssage = HelloMessage(gameId: game.id, name: game.gameName, url: game.image, rating: game.metacritic, categories: game.tags)
@@ -98,11 +109,12 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
                 let gameCell = CellNode(id: "aaa", helloMesssage)
                 gameCells.append(gameCell)
             }
-
-            if !fromSearch {
+                
+            if(!fromSearch){
                 let updateCell = CellNode(id: "aa", LoadingCell())
                 gameCells.append(updateCell)
             }
+          
 
             let helloSection = Section(id: "hello", cells: gameCells)
             sections.append(helloSection)
@@ -122,11 +134,15 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
 
 extension GamesVC: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBarLoadingPage = 1
         fromSearch = false
         gamesViewModel?.deleteGames()
         gamesViewModel?.fetchGames(completion: { [weak self] in
             self?.render()
         })
+      render()
+    
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -138,6 +154,7 @@ extension GamesVC: UISearchBarDelegate {
             self.render()
        
         } else if searchText.count >= 4 {
+            tempKey = searchText
             searchData(key: searchText)
         }
     }
