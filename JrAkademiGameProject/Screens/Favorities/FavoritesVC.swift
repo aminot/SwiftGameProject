@@ -48,7 +48,8 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
                     print("Hata: Veri uyumsuz veya eksik.")
                 }
             }
-            
+            title = "Favorites (" + String(gameArray.count) + ")"
+            self.tabBarItem.title = "Favorites"
             render()
             
         } catch let error as NSError {
@@ -59,14 +60,16 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         if viewController is FavoritesVC {
             getData()
+           
+            self.tabBarItem.title = "Favorites"
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.delegate = self
-      
-        title = "Favorites"
+
+     
         tableView.contentInset.top = 0
         tableView.separatorStyle = .none
         renderer.target = tableView
@@ -96,6 +99,7 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
                     // click Handler
                     let detailsViewController = DetailsViewController()
                     detailsViewController.gameId = gameId
+                    self?.title = "Favorites"
                     self?.navigationController?.pushViewController(detailsViewController, animated: true)
                 }
                 

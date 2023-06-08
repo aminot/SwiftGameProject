@@ -110,6 +110,24 @@
 			path = Adapters;
 			sourceTree = "<group>";
 		};
+		C911F1952A328A97002044ED /* GamesVC */ = {
+			isa = PBXGroup;
+			children = (
+				C95742772A2F5F92002119A2 /* NoGameCell.swift */,
+				C9B8A3A42A2A6D4300C89F79 /* LoadingCell.swift */,
+				C92C81412A2539B60049C164 /* GameTableViewCell.swift */,
+			);
+			path = GamesVC;
+			sourceTree = "<group>";
+		};
+		C911F1962A329485002044ED /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				C98420A52A24CAA300D8C324 /* JrAkademiGameProject.xcdatamodeld */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		C922E19B2A263D5300650260 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,10 +149,8 @@
 		C92C81402A2539A60049C164 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				C911F1952A328A97002044ED /* GamesVC */,
 				C9FA531E2A2FDCC30026374A /* GameDetailsViewCell */,
-				C92C81412A2539B60049C164 /* GameTableViewCell.swift */,
-				C9B8A3A42A2A6D4300C89F79 /* LoadingCell.swift */,
-				C95742772A2F5F92002119A2 /* NoGameCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -170,6 +186,7 @@
 		C984209B2A24CAA300D8C324 /* JrAkademiGameProject */ = {
 			isa = PBXGroup;
 			children = (
+				C911F1962A329485002044ED /* Database */,
 				C911F18C2A324574002044ED /* Adapters */,
 				C99BF8272A28BCFF00D061E4 /* Network */,
 				C922E19C2A263D5E00650260 /* Screens */,
@@ -181,7 +198,6 @@
 				C98420A82A24CAA400D8C324 /* Assets.xcassets */,
 				C98420AA2A24CAA400D8C324 /* LaunchScreen.storyboard */,
 				C98420AD2A24CAA400D8C324 /* Info.plist */,
-				C98420A52A24CAA300D8C324 /* JrAkademiGameProject.xcdatamodeld */,
 			);
 			path = JrAkademiGameProject;
 			sourceTree = "<group>";
