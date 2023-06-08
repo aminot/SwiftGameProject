@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9D3866CA94CA4FB52E12316F /* Pods_JrAkademiGameProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6D41B42F4019647A11F02B /* Pods_JrAkademiGameProject.framework */; };
+		C911F1942A327361002044ED /* FavoritesModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C911F1932A327361002044ED /* FavoritesModal.swift */; };
 		C92C81422A2539B60049C164 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92C81412A2539B60049C164 /* GameTableViewCell.swift */; };
 		C939F9302A24E1AF00B4ED2B /* GamesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C939F92F2A24E1AF00B4ED2B /* GamesModel.swift */; };
 		C939F9322A24E1C400B4ED2B /* GamesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C939F9312A24E1C400B4ED2B /* GamesViewModel.swift */; };
@@ -39,6 +40,7 @@
 		84A58B956DF3E751EA1C06C0 /* Pods-JrAkademiGameProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JrAkademiGameProject.release.xcconfig"; path = "Target Support Files/Pods-JrAkademiGameProject/Pods-JrAkademiGameProject.release.xcconfig"; sourceTree = "<group>"; };
 		8C6D41B42F4019647A11F02B /* Pods_JrAkademiGameProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JrAkademiGameProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B59F0DC3D13E3E7EEDD49FDD /* Pods-JrAkademiGameProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JrAkademiGameProject.debug.xcconfig"; path = "Target Support Files/Pods-JrAkademiGameProject/Pods-JrAkademiGameProject.debug.xcconfig"; sourceTree = "<group>"; };
+		C911F1932A327361002044ED /* FavoritesModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModal.swift; sourceTree = "<group>"; };
 		C92C81412A2539B60049C164 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		C939F92F2A24E1AF00B4ED2B /* GamesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModel.swift; sourceTree = "<group>"; };
 		C939F9312A24E1C400B4ED2B /* GamesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewModel.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			children = (
 				C9FA53282A2FEC370026374A /* FavoritesVC.swift */,
 				C9FA532A2A2FEC680026374A /* FavoritesViewModel.swift */,
+				C911F1932A327361002044ED /* FavoritesModal.swift */,
 			);
 			path = Favorities;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				C9FA531D2A2FCCC70026374A /* GameDetailsModal.swift in Sources */,
 				C939F9322A24E1C400B4ED2B /* GamesViewModel.swift in Sources */,
 				C984209D2A24CAA300D8C324 /* AppDelegate.swift in Sources */,
+				C911F1942A327361002044ED /* FavoritesModal.swift in Sources */,
 				C9FA531B2A2FCC9F0026374A /* GameDetailsViewModel.swift in Sources */,
 				C9B8A3A52A2A6D4300C89F79 /* LoadingCell.swift in Sources */,
 				C9FA532B2A2FEC680026374A /* FavoritesViewModel.swift in Sources */,

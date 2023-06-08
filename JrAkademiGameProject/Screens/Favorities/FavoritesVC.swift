@@ -120,10 +120,3 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
     }
 }
 
-struct GameData {
-    var metacritic: Int
-    var id: Int
-    var name: String
-    var image: String
-    var genres: String
-}
