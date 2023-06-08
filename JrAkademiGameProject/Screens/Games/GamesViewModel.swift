@@ -10,6 +10,7 @@ class GamesViewModel {
     }
 
     func deleteGames() {
+        page = 1
         games.removeAll()
        
     }

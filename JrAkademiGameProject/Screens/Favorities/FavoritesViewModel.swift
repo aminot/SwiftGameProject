@@ -8,10 +8,8 @@
 import Foundation
 
 class FavoritesViewModel {
-    var games: [GameModel] = []
+//coredatadan gelen veriyi adaptere tşaıyamadığımız için viewcontrollerde kullandım
     
-  
-
     
 }
 
