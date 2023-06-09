@@ -7,7 +7,7 @@
 
 import Foundation
 // MARK: - Welcome
-struct GameDetailsModal: Decodable {
+struct GameDetailsModel: Decodable {
     let name: String?
     let descriptionRaw: String?
     let backgroundImageAdditional: String?
@@ -15,7 +15,6 @@ struct GameDetailsModal: Decodable {
     let redditURL: String?
     let metacritic:Int?
     let genres : [Genre]?
-    
   enum CodingKeys: String, CodingKey {
     case name
     case descriptionRaw = "description_raw"
@@ -26,10 +25,7 @@ struct GameDetailsModal: Decodable {
     case genres
   }
 }
-
-
 // MARK: - Genre
-
 struct Genre: Codable {
     let name: String?
     enum CodingKeys: String, CodingKey {
