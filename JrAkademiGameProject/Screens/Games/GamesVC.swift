@@ -197,10 +197,17 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
 
             for game in fetchedGames {
                 var gamesCell : GamesCell
-                if(checkId(game.id)){
-                    gamesCell = GamesCell(gameId: game.id, name: game.gameName, url: game.image, rating: game.metacritic, categories: game.tags, color: UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0))
-                    
+                if checkId(game.id) {
+                    gamesCell = GamesCell(
+                        gameId: game.id,
+                        name: game.gameName,
+                        url: game.image,
+                        rating: game.metacritic,
+                        categories: game.tags,
+                        color: UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
+                    )
                 }
+
                 else
                 {
                     gamesCell = GamesCell(gameId: game.id, name: game.gameName, url: game.image, rating: game.metacritic, categories: game.tags, color: UIColor.white)
@@ -259,13 +266,13 @@ extension GamesVC: UISearchBarDelegate {
         if !isTypingAllowed {
 
                     searchBar.text = searchText
-            if searchText.count < 4 {
+            if searchText.count < 3 {
                 gamesViewModel?.deleteGames()
            
                 self.render()
                 self.tableView.reloadData()
            
-            } else if searchText.count >= 4 {
+            } else if searchText.count >= 3 {
                 tempKey = searchText
                 searchData(key: searchText)
                 self.tableView.reloadData()

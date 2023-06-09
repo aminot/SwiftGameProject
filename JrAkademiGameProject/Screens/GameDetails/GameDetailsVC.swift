@@ -122,7 +122,16 @@ class DetailsViewController: UIViewController {
         }
 
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
-        fetchRequest.predicate = NSPredicate(format: "name == %@ AND image == %@ AND metacritic == %d AND genres == %@", gameDetails?.name ?? "", gameDetails?.backgroundImageAdditional ?? "", gameDetails?.metacritic ?? 0, combinedGenres ?? "")
+        let name = gameDetails?.name ?? ""
+        let image = gameDetails?.backgroundImageAdditional ?? ""
+        let metacritic = gameDetails?.metacritic ?? 0
+        let genres = combinedGenres ?? ""
+
+        let predicateFormat = "name == %@ AND image == %@ AND metacritic == %d AND genres == %@"
+        let predicate = NSPredicate(format: predicateFormat, name, image, metacritic, genres)
+
+        fetchRequest.predicate = predicate
+
 
         do {
             let results = try managedContext.fetch(fetchRequest)

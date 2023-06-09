@@ -9,7 +9,6 @@ pod 'Alamofire'
 pod 'SnapKit', '~> 5.6.0'
 pod 'Kingfisher'
 pod 'SwipeCellKit'
-pod 'CarbonList'
   # Pods for JrAkademiGameProject
 
 end

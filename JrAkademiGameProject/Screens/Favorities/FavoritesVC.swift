@@ -9,28 +9,22 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
     private let tableView = UITableView()
     private let cellIdentifier = "Cell"
     var gameArray: [GameData] = []
-  
     private let renderer = Renderer(
         adapter: CustomFavoritesAdapter(),
         updater: UITableViewUpdater()
     )
-    
     func getData() {
         gameArray.removeAll()
-        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
         let managedObjectContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
         fetchRequest.resultType = .dictionaryResultType
         fetchRequest.propertiesToFetch = ["metacritic", "name", "image", "genres","id"]
         fetchRequest.returnsDistinctResults = true
-        
         do {
             let results = try managedObjectContext.fetch(fetchRequest) as! [NSDictionary]
-            
             for result in results {
                 if let metacritic = result["metacritic"] as? Int,
                    let id = result["id"] as? Int,
@@ -56,11 +50,6 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
             print("Could not fetch data: \(error), \(error.userInfo)")
         }
     }
-    
-
-
-    
-    
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         if viewController is FavoritesVC {
             getData()
@@ -68,7 +57,6 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
             self.tabBarItem.title = "Favorites"
         }
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.delegate = self
@@ -80,7 +68,6 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
         renderer.adapter.favoritesVC = self
         setupUI()
     }
-    
     func render() {
         var sections: [Section] = []
         var gameCells: [CellNode] = []
@@ -106,19 +93,14 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
                     self?.title = "Favorites"
                     self?.navigationController?.pushViewController(detailsViewController, animated: true)
                 }
-                
                 let gameCell = CellNode(id: "aaa", helloMessage)
                 gameCells.append(gameCell)
             }
-            
             let helloSection = Section(id: "hello", cells: gameCells)
             sections.append(helloSection)
         }
-        
-        
         renderer.render(sections)
     }
-    
     private func setupUI() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
