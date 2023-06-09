@@ -43,9 +43,11 @@ class GameTableViewCell: UITableViewCell {
     
     let separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0)
+        view.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         return view
     }()
+ 
+    var backgroundColor2: UIColor = .red
     
     var gameId2: Int?
     
@@ -69,7 +71,7 @@ class GameTableViewCell: UITableViewCell {
         addSubview(categoriesLabel)
         addSubview(separatorView)
         
-        backgroundColor = UIColor.white
+        backgroundColor = backgroundColor2
         
         gameImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
@@ -112,13 +114,14 @@ class GameTableViewCell: UITableViewCell {
     }
 }
 
-struct HelloMessage: IdentifiableComponent {
+struct GamesCell: IdentifiableComponent {
     let gameId: Int
     let name: String
     let url: String
     let rating: Int
     let categories: [String]
     var tapGestureHandler: ((Int) -> Void)?
+    let color : UIColor
     
     var id: String {
         name
@@ -134,6 +137,7 @@ struct HelloMessage: IdentifiableComponent {
     
     func render(in content: GameTableViewCell) {
         content.gameId2 = gameId
+        content.backgroundColor2 = color
         content.tapGestureHandler = tapGestureHandler
         content.nameLabel.text = name
         if let imageUrl = URL(string: url) {
@@ -143,6 +147,11 @@ struct HelloMessage: IdentifiableComponent {
                 options: [.processor(processor)]
             )
         }
+        
+        
+        content.backgroundColor = color
+  
+        
         
         let ratingText = "\(rating)"
         let attributedString = NSMutableAttributedString(string: ratingText)
@@ -163,7 +172,7 @@ struct HelloMessage: IdentifiableComponent {
         return CGSize(width: bounds.width, height: 136)
     }
     
-    func shouldContentUpdate(with next: HelloMessage) -> Bool {
+    func shouldContentUpdate(with next: GamesCell) -> Bool {
         return false
     }
 }

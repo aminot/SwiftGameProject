@@ -11,18 +11,27 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
     var gamesViewModel: GamesViewModel? = GamesViewModel()
     private let tableView = UITableView()
     private let cellIdentifier = "Cell"
-
+    var idArray : [Int] = []
+    var isTypingAllowed : Bool = true
     private let renderer = Renderer(
         adapter: CustomTableViewAdapter(),
         updater: UITableViewUpdater()
     )
 
+
+
+
+    
     func getData() {
         gamesViewModel?.fetchGames(completion: { [weak self] in
             if let fetchedGames = self?.gamesViewModel?.getGames() {
                 self?.render()
+                self?.tableView.reloadData()
             }
+         
         })
+        
+     
     }
 
     func searchData(key: String) {
@@ -60,10 +69,34 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
         }
     }
 
+    func deleteAllData() {    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "JrAkademiGameProject")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+        let context = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Clicked")
+        do {
+            let results = try context.fetch(fetchRequest)
+            for object in results {
+                guard let objectData = object as? NSManagedObject else { continue }
+                context.delete(objectData)
+            }
+            try context.save()
+        } catch let error {
+            print("Error deleting data: \(error)")
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        getData()
-
+        //getData()
+       //getData()
+        //fetchAllIDs()
+       //deleteAllData()
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
@@ -74,10 +107,75 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
         tableView.contentInset.top = -25
         tableView.separatorStyle = .none
         renderer.target = tableView
-
+   
         setupUI()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.getData()
+        self.fetchAllIDs()
+       
+        
+    }
+    
 
+    func fetchAllIDs(){
+        var idArray: [Int] = []
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+          return 
+        }
+        
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Clicked")
+        fetchRequest.propertiesToFetch = ["id"] // Burada "id" yerine varlıkta kullandığınız ID özelliğinin adını kullanmalısınız
+        fetchRequest.resultType = .dictionaryResultType
+        
+        do {
+            let results = try context.fetch(fetchRequest) as? [[String: Any]]
+            
+            for result in results ?? [] {
+                if let id = result["id"] as? Int {
+                    idArray.append(id)
+                }
+            }
+        } catch let error as NSError {
+            print("Could not fetch IDs. \(error), \(error.userInfo)")
+        }
+        self.idArray=idArray
+   
+    
+ 
+    }
+
+    
+    func saveClicked(id : Int){
+        // CoreData'deki veritabanı işlemlerini gerçekleştir
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            
+            let context = appDelegate.persistentContainer.viewContext
+            let entity = NSEntityDescription.entity(forEntityName: "Clicked", in: context)!
+            let dataObject = NSManagedObject(entity: entity, insertInto: context)
+            
+            dataObject.setValue(id, forKeyPath: "id")
+            
+            do {
+                try context.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+      
+    }
+ 
+    func checkId(_ id: Int) -> Bool {
+        return idArray.contains(id)
+    }
+    
     func render() {
         var sections: [Section] = []
         var gameCells: [CellNode] = []
@@ -90,23 +188,34 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
             let updateCell = CellNode(id: "aa", EmptyComponent(name: "No game has been searched."))
             gameCells.append(updateCell)
 
-            let helloSection = Section(id: "hello", cells: gameCells)
-            sections.append(helloSection)
+            let gamesSection = Section(id: "hello", cells: gameCells)
+            sections.append(gamesSection)
 
             renderer.render(sections)
         } else {
         
 
             for game in fetchedGames {
-                var helloMesssage = HelloMessage(gameId: game.id, name: game.gameName, url: game.image, rating: game.metacritic, categories: game.tags)
+                var gamesCell : GamesCell
+                if(checkId(game.id)){
+                    gamesCell = GamesCell(gameId: game.id, name: game.gameName, url: game.image, rating: game.metacritic, categories: game.tags, color: UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0))
+                    
+                }
+                else
+                {
+                    gamesCell = GamesCell(gameId: game.id, name: game.gameName, url: game.image, rating: game.metacritic, categories: game.tags, color: UIColor.white)
+                }
+              
 
-                helloMesssage.tapGestureHandler = { [weak self] gameID in
+                gamesCell.tapGestureHandler = { [weak self] gameID in
+                    self?.saveClicked(id:gameID)
+                 
                     let detailsViewController = DetailsViewController()
                     detailsViewController.gameId = gameID
                     self?.navigationController?.pushViewController(detailsViewController, animated: true)
                 }
 
-                let gameCell = CellNode(id: "aaa", helloMesssage)
+                let gameCell = CellNode(id: "aaa", gamesCell)
                 gameCells.append(gameCell)
             }
                 
@@ -132,30 +241,51 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
     }
 }
 
+
 extension GamesVC: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
+        gamesViewModel?.deleteGames()
         searchBarLoadingPage = 1
         fromSearch = false
         gamesViewModel?.deleteGames()
         gamesViewModel?.fetchGames(completion: { [weak self] in
-            self?.render()
+          self?.render()
         })
       render()
     
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if !isTypingAllowed {
+
+                    searchBar.text = searchText
+            if searchText.count < 4 {
+                gamesViewModel?.deleteGames()
+           
+                self.render()
+                self.tableView.reloadData()
+           
+            } else if searchText.count >= 4 {
+                tempKey = searchText
+                searchData(key: searchText)
+                self.tableView.reloadData()
+            }
+            
+        }
         fromSearch = true
    
-        if searchText.count < 4 {
-            gamesViewModel?.deleteGames()
-       
-            self.render()
-       
-        } else if searchText.count >= 4 {
-            tempKey = searchText
-            searchData(key: searchText)
-        }
+  
     }
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        if !isTypingAllowed {
+            return false
+            }
+        isTypingAllowed = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.isTypingAllowed = true
+        }
+        return true
+    }
+    
 }

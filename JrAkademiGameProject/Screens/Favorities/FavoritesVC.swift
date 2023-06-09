@@ -57,6 +57,10 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
         }
     }
     
+
+
+    
+    
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         if viewController is FavoritesVC {
             getData()
@@ -88,11 +92,11 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
             sections.append(helloSection)
         } else {
             for gameData in gameArray {
-                var helloMessage = HelloMessage(gameId: gameData.id,
+                var helloMessage = GamesCell(gameId: gameData.id,
                                                 name: gameData.name,
                                                 url: gameData.image,
                                                 rating: gameData.metacritic,
-                                                categories: [gameData.genres])
+                                                categories: [gameData.genres], color: UIColor.white)
                 
                 helloMessage.tapGestureHandler = { [weak self] gameId in
                     print(gameId, "ufuk")
