@@ -13,7 +13,6 @@ struct GameModel {
     let metacritic: Int
     let image: String
     let tags: [String]
-    
     init(gameName: String, metacritic: Int, image: String, tags: [String],id: Int) {
         self.gameName = gameName
         self.metacritic = metacritic

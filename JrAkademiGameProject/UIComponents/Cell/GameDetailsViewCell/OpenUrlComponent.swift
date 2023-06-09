@@ -5,57 +5,47 @@ import Carbon
 
 class OpenUrlComponent: UIView, Component, UITextViewDelegate {
     func render(in content: OpenUrlComponent) {
-        
     }
-    
+
     let urlTextView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
         textView.isScrollEnabled = false
         return textView
     }()
-    
     init(websiteName: String, url: String) {
         super.init(frame: .zero)
         setupViews()
         setupConstraints()
         configure(websiteName: websiteName, url: url)
     }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupViews()
         setupConstraints()
     }
-    
     private func setupViews() {
         addSubview(urlTextView)
         // UITextViewDelegate’i ayarla
         urlTextView.delegate = self
     }
-    
     private func setupConstraints() {
         urlTextView.snp.makeConstraints {
             $0.top.left.equalToSuperview().offset(16)
             $0.bottom.right.equalToSuperview().inset(16)
         }
     }
-    
     func configure(websiteName: String, url: String) {
         let text = "Visit \(websiteName)"
         let attributedText = NSMutableAttributedString(string: text)
-        
         // Textin tamamını seçili hale getir
         let range = NSRange(location: 0, length: attributedText.length)
         attributedText.addAttribute(.link, value: url, range: range)
-        
         // Özel formatlamalar yapabilirsiniz
         attributedText.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 16), range: range)
         // attributedText.addAttribute(.foregroundColor, value: UIColor(named: “TextColorGrey”) ?? UIColor.black, range: range)
-        
         // Attributed text’i textView’a atayın
         urlTextView.attributedText = attributedText
-        
         // URL’yi tıklanabilir hale getir
         urlTextView.isSelectable = true
         urlTextView.isEditable = false

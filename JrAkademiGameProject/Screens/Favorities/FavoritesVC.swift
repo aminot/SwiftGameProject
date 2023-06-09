@@ -45,7 +45,6 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
             title = "Favorites (" + String(gameArray.count) + ")"
             self.tabBarItem.title = "Favorites"
             render()
-            
         } catch let error as NSError {
             print("Could not fetch data: \(error), \(error.userInfo)")
         }
@@ -53,7 +52,6 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         if viewController is FavoritesVC {
             getData()
-           
             self.tabBarItem.title = "Favorites"
         }
     }
@@ -61,7 +59,6 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
         super.viewDidLoad()
         navigationController?.delegate = self
 
-     
         tableView.contentInset.top = 0
         tableView.separatorStyle = .none
         renderer.target = tableView
@@ -71,7 +68,6 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
     func render() {
         var sections: [Section] = []
         var gameCells: [CellNode] = []
-        
         if gameArray.isEmpty {
             let updateCell = CellNode(id: "aa", EmptyComponent(name: "No game has been searched."))
             gameCells.append(updateCell)
@@ -84,7 +80,6 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
                                                 url: gameData.image,
                                                 rating: gameData.metacritic,
                                                 categories: [gameData.genres], color: UIColor.white)
-                
                 helloMessage.tapGestureHandler = { [weak self] gameId in
                     print(gameId, "ufuk")
                     // click Handler
@@ -109,4 +104,3 @@ class FavoritesVC: UIViewController, UINavigationControllerDelegate {
         tableView.backgroundColor = UIColor(red: 0xF8/255, green: 0xF8/255, blue: 0xF8/255, alpha: 1.0)
     }
 }
-

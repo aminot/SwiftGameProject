@@ -4,7 +4,6 @@ import SnapKit
 import Carbon
 
 class GamesVC: UIViewController, UISearchControllerDelegate {
-
     var fromSearch = false
     var tempKey : String = ""
    var searchBarLoadingPage = 1
@@ -17,23 +16,14 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
         adapter: CustomTableViewAdapter(),
         updater: UITableViewUpdater()
     )
-
-
-
-
-    
     func getData() {
         gamesViewModel?.fetchGames(completion: { [weak self] in
             if let fetchedGames = self?.gamesViewModel?.getGames() {
                 self?.render()
                 self?.tableView.reloadData()
             }
-         
         })
-        
-     
     }
-
     func searchData(key: String) {
         fromSearch = true
         gamesViewModel?.fetchSearchGames(searchQuery: key, completion: { [weak self] in
@@ -50,8 +40,6 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
             }
         })
     }
-    
-
     @objc func veriAlindi(notification: Notification) {
         if let veri = notification.userInfo?["veri"] as? Bool {
             if !fromSearch {
@@ -116,24 +104,16 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
         
         self.getData()
         self.fetchAllIDs()
-       
-        
     }
-    
-
     func fetchAllIDs(){
         var idArray: [Int] = []
-        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
           return 
         }
-        
         let context = appDelegate.persistentContainer.viewContext
-        
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Clicked")
         fetchRequest.propertiesToFetch = ["id"] // Burada "id" yerine varlıkta kullandığınız ID özelliğinin adını kullanmalısınız
         fetchRequest.resultType = .dictionaryResultType
-        
         do {
             let results = try context.fetch(fetchRequest) as? [[String: Any]]
             
@@ -146,12 +126,8 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
             print("Could not fetch IDs. \(error), \(error.userInfo)")
         }
         self.idArray=idArray
-   
-    
- 
-    }
 
-    
+    }
     func saveClicked(id : Int){
         // CoreData'deki veritabanı işlemlerini gerçekleştir
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -171,20 +147,14 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
             }
       
     }
- 
     func checkId(_ id: Int) -> Bool {
         return idArray.contains(id)
     }
-    
     func render() {
         var sections: [Section] = []
         var gameCells: [CellNode] = []
-
         let fetchedGames = gamesViewModel?.getGames() ?? []
-
         if fetchedGames.isEmpty {
-
-
             let updateCell = CellNode(id: "aa", EmptyComponent(name: "No game has been searched."))
             gameCells.append(updateCell)
 
@@ -193,8 +163,6 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
 
             renderer.render(sections)
         } else {
-        
-
             for game in fetchedGames {
                 var gamesCell : GamesCell
                 if checkId(game.id) {
@@ -212,8 +180,6 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
                 {
                     gamesCell = GamesCell(gameId: game.id, name: game.gameName, url: game.image, rating: game.metacritic, categories: game.tags, color: UIColor.white)
                 }
-              
-
                 gamesCell.tapGestureHandler = { [weak self] gameID in
                     self?.saveClicked(id:gameID)
                  
@@ -225,20 +191,16 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
                 let gameCell = CellNode(id: "aaa", gamesCell)
                 gameCells.append(gameCell)
             }
-                
             if(!fromSearch){
                 let updateCell = CellNode(id: "aa", LoadingCell())
                 gameCells.append(updateCell)
             }
-          
-
             let helloSection = Section(id: "hello", cells: gameCells)
             sections.append(helloSection)
 
             renderer.render(sections)
         }
     }
-
     private func setupUI() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
@@ -247,8 +209,6 @@ class GamesVC: UIViewController, UISearchControllerDelegate {
         tableView.backgroundColor = UIColor(red: 0xF8/255, green: 0xF8/255, blue: 0xF8/255, alpha: 1.0)
     }
 }
-
-
 extension GamesVC: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         gamesViewModel?.deleteGames()
@@ -261,7 +221,6 @@ extension GamesVC: UISearchBarDelegate {
       render()
     
     }
-
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !isTypingAllowed {
 
@@ -280,8 +239,6 @@ extension GamesVC: UISearchBarDelegate {
             
         }
         fromSearch = true
-   
-  
     }
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         

@@ -9,7 +9,5 @@ import Foundation
 
 class FavoritesViewModel {
 //coredatadan gelen veriyi adaptere tşaıyamadığımız için viewcontrollerde kullandım
-    
-    
 }
 

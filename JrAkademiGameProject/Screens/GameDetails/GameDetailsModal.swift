@@ -15,7 +15,6 @@ struct GameDetailsModel: Decodable {
     let redditURL: String?
     let metacritic:Int?
     let genres : [Genre]?
-    
   enum CodingKeys: String, CodingKey {
     case name
     case descriptionRaw = "description_raw"
@@ -26,10 +25,7 @@ struct GameDetailsModel: Decodable {
     case genres
   }
 }
-
-
 // MARK: - Genre
-
 struct Genre: Codable {
     let name: String?
     enum CodingKeys: String, CodingKey {

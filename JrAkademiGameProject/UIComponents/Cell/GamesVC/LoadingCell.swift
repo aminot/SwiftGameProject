@@ -8,7 +8,6 @@ class LoadingCell: UITableViewCell, Component {
         activityIndicatorView.startAnimating()
         return activityIndicatorView
     }()
-    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13)
@@ -18,42 +17,34 @@ class LoadingCell: UITableViewCell, Component {
         label.textAlignment = .center
         return label
     }()
-    
     private var isLoading: Bool = true {
         didSet {
             updateUI()
         }
     }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupUI()
     }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         
         nameLabel.text = nil
     }
-    
     private func setupUI() {
         contentView.addSubview(nameLabel)
         contentView.addSubview(activityIndicatorView)
-        
         nameLabel.snp.makeConstraints { make in
             make.centerX.equalTo(contentView)
             make.leading.trailing.equalTo(contentView).inset(8)
             make.bottom.equalTo(contentView).inset(8)
         }
-        
         activityIndicatorView.snp.makeConstraints { make in
             make.center.equalTo(contentView)
         }
-        
         updateUI()
     }
-    
     private func updateUI() {
         if isLoading {
             nameLabel.text = "Yükleniyor"
@@ -63,27 +54,21 @@ class LoadingCell: UITableViewCell, Component {
             activityIndicatorView.stopAnimating()
         }
     }
-    
     func startLoading() {
         isLoading = true
     }
-    
     func stopLoading() {
         isLoading = false
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     func render(in content: LoadingCell) {
         // Burada herhangi bir işlem yapmanıza gerek yok
     }
-    
     func referenceSize(in bounds: CGRect) -> CGSize? {
         return CGSize(width: bounds.width, height: 60)
     }
-    
     func renderContent() -> LoadingCell {
         return self
     }
